@@ -1,0 +1,23 @@
+{
+    "domain": "viaris",
+    "name": "Viaris EV charger",
+    "integration_type": "hub",
+    "config_flow": true,
+    "documentation": "https://www.home-assistant.io/integrations/viaris",
+    "requirements": [],
+    "ssdp": [],
+    "zeroconf": [],
+    "homekit": {},
+    "dependencies": ["mqtt"],
+    "codeowners": ["@HGC72"],
+    "iot_class": "local_push",
+    "mqtt": [
+      "XEO/VIARIS/+/stat/0/+/streamrt/modulator",
+      "XEO/VIARIS/+/stat/0/+/value/evsm/mennekes",
+      "XEO/VIARIS/+/stat/0/+/value/evsm/schuko",
+      "XEO/VIARIS/+/stat/0/+/boot/sys",
+      "XEO/VIARIS/+/stat/0/+/init_boot/sys",
+      "XEO/VIARIS/+/stat/0/+/cfg/mqtt_user"
+    ]
+  }
+  
