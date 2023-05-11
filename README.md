@@ -8,7 +8,7 @@ Home Assistant integration for monitoring Viaris EV chargers.
 
 ## Sample view
 
-![imagen](https://user-images.githubusercontent.com/66405397/236451435-8ade3347-fef1-4b9a-aa89-bbb003019b64.png)
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/0529bd2b-17ca-4747-b1a0-c648247c8641)
 
 ## Installation
 
