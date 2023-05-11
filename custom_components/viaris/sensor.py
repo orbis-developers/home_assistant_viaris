@@ -14,12 +14,12 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 
-# from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import UnitOfElectricCurrent, UnitOfEnergy, UnitOfPower
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.json import json_dumps, json_loads
+from homeassistant.helpers.json import json_dumps
+from homeassistant.util.json import json_loads
 
 from . import ViarisEntityDescription
 from .const import (
@@ -97,7 +97,6 @@ def get_state_conn1(value) -> str:
         connector_name = "schuko"
     try:
         return getattr(
-            # ChargerStatusCodes, data["data"]["elements"][0]["connectorName"]
             ChargerStatusCodes,
             connector_name,
         )[int(data["data"]["elements"][0]["state"])]
@@ -109,7 +108,6 @@ def get_state_conn2(value) -> str:
     """Transform codes into a human readable string."""
     data = json_loads(value)
     if length_hint(data["data"]["elements"]) > 1:
-
         type_connector = data["data"]["elements"][1]["connectorName"]
         if type_connector in ("mennekes", "mennekes1", "mennekes2"):
             connector_name = "mennekes"
@@ -117,7 +115,6 @@ def get_state_conn2(value) -> str:
             connector_name = "schuko"
         try:
             return getattr(
-                # ChargerStatusCodes, data["data"]["elements"][1]["connectorName"]
                 ChargerStatusCodes,
                 connector_name,
             )[int(data["data"]["elements"][1]["state"])]
@@ -270,7 +267,6 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=STATE_CONN1_KEY,
         state=get_state_conn1,
-        # icon="mdi:ev-plug-type2",
         name="Status connector 1",
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=True,
@@ -279,7 +275,6 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=STATE_CONN2_KEY,
         state=get_state_conn2,
-        # icon="mdi:power-socket-de",
         name="Status connector 2",
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=True,
@@ -345,7 +340,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         name="Total Current",
         native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         device_class=SensorDeviceClass.CURRENT,
-        state_class=SensorStateClass.TOTAL,
+        state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_total_current,
     ),

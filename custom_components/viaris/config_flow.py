@@ -19,7 +19,12 @@ from .const import (
     SERIAL_PREFIX_UNI,
 )
 
-# from homeassistant.helpers import config_validation as cv
+try:
+    # < HA 2022.8.0
+    from homeassistant.components.mqtt import MqttServiceInfo
+except ImportError:
+    # >= HA 2022.8.0
+    from homeassistant.helpers.service_info.mqtt import MqttServiceInfo
 
 
 _LOGGER = logging.getLogger(__name__)
@@ -27,9 +32,6 @@ _LOGGER = logging.getLogger(__name__)
 # adjust the data schema to the data that you need
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {
-        # vol.Required(CONF_SERIAL_NUMBER): vol.All(
-        # cv.string, vol.Length(min=13, max=13)
-        # ),
         vol.Required(CONF_SERIAL_NUMBER): str,
     }
 )
@@ -87,6 +89,29 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Initialize flow."""
         self._serial_number = None
 
+    async def async_step_mqtt(self, discovery_info: MqttServiceInfo) -> FlowResult:
+        """Handle a flow initialized by MQTT discovery."""
+        subscribed_topic = discovery_info.subscribed_topic
+
+        # Subscribed topic must be in sync with the manifest.json
+        assert subscribed_topic == "XEO/VIARIS/#"
+
+        topic = discovery_info.topic.split("/")
+        self._serial_number = topic[5]
+        if len(self._serial_number) == 13:
+            if (
+                self._serial_number[0:5] == SERIAL_PREFIX_UNI
+                or self._serial_number[0:5] == SERIAL_PREFIX_COMBI
+            ):
+                await self.async_set_unique_id(self._serial_number)
+                self._abort_if_unique_id_configured()
+                return await self.async_step_discovery_confirm()
+            else:
+                return self.async_abort(reason="invalid_discovery_info")
+
+        else:
+            return self.async_abort(reason="invalid_discovery_info")
+
     async def async_step_discovery_confirm(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
@@ -105,7 +130,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self._set_confirm_only()
         return self.async_show_form(
             step_id="discovery_confirm",
-            description_placeholders={"name": name},
+            description_placeholders={"name": name, "serial": self._serial_number},
         )
 
     async def async_step_user(

@@ -13,6 +13,9 @@
         },
         "flow_title": "{name}",
         "step": {
+            "discovery_confirm": {
+                "description": "¿Desea activar la integración del dispositivo {serial}?"
+            },
             "user": {
                 "description": "Por favor, introduzca en may\u00fasculas el n\u00famero de serie del cargador",
                 "data": {

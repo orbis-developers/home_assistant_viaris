@@ -10,7 +10,8 @@ from .const import (  # CONF_TOPIC_PREFIX,
     CONF_SERIAL_NUMBER,
     DEFAULT_TOPIC_PREFIX,
     DEVICE_INFO_MANUFACTURER,
-    DEVICE_INFO_MODEL,
+    DEVICE_INFO_MODEL_UNI,
+    DEVICE_INFO_MODEL_COMBIPLUS,
     DOMAIN,
     MODEL_COMBIPLUS,
     MODEL_UNI,
@@ -76,9 +77,17 @@ class ViarisEntity(Entity):
         self._topic_mqtt_subs = (
             f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/cfg/mqtt_user"
         )
-        self._attr_device_info = DeviceInfo(
-            identifiers={(DOMAIN, serial_number)},
-            name=config_entry.title,
-            manufacturer=DEVICE_INFO_MANUFACTURER,
-            model=DEVICE_INFO_MODEL,
-        )
+        if self._model == MODEL_COMBIPLUS:
+            self._attr_device_info = DeviceInfo(
+                identifiers={(DOMAIN, serial_number)},
+                name=config_entry.title,
+                manufacturer=DEVICE_INFO_MANUFACTURER,
+                model=DEVICE_INFO_MODEL_COMBIPLUS,
+            )
+        else:
+            self._attr_device_info = DeviceInfo(
+                identifiers={(DOMAIN, serial_number)},
+                name=config_entry.title,
+                manufacturer=DEVICE_INFO_MANUFACTURER,
+                model=DEVICE_INFO_MODEL_UNI,
+            )

@@ -12,6 +12,9 @@
         },
         "flow_title": "{name}",
         "step": {
+            "discovery_confirm": {
+                "description": "Do you want to set up the viaris integration for {serial} device?"
+            },
             "user": {
                 "description": "Enter charger serial number in capital letters, please ",
                 "data": {
