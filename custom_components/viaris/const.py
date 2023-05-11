@@ -1,4 +1,5 @@
 """Constants for viaris integration."""
+from typing import Final
 
 DOMAIN = "viaris"
 
@@ -57,8 +58,10 @@ DEVICE_INFO_MODEL_UNI = "Viaris UNI charger"
 DEVICE_INFO_MODEL_COMBIPLUS = "Viaris COMBIPLUS charger"
 SERIAL_PREFIX_UNI = "EVVC3"
 SERIAL_PREFIX_COMBI = "EVVC4"
-MODEL_UNI = ("Uni",)
-MODEL_COMBIPLUS = ("Combiplus",)
+MODEL_UNI = "Uni"
+MODEL_COMBIPLUS = "Combiplus"
+KVARH_UNITS: Final = "kVarh"
+KVAR_UNITS: Final = "kVar"
 
 
 class ChargerStatusCodes:
