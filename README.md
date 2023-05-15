@@ -8,7 +8,7 @@ Home Assistant integration for monitoring Viaris EV chargers.
 
 ## Sample view
 
-![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/0529bd2b-17ca-4747-b1a0-c648247c8641)
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/d59321d6-0b74-499a-bc3a-3827f2f3aa5a)
 
 ## Installation
 
@@ -54,23 +54,23 @@ In order to add the viaris EV charger integration, first of all, MQTT integratio
 | Spl | `config` |   | :heavy_check_mark: | |
 | TMC100 | `config` |   | :heavy_check_mark: | |
 | Active energy connector 1 | `Diagnostic` | kWh   | :heavy_check_mark: | |
-| Active energy connector 2 | `Diagnostic` | kWh  | :heavy_check_mark: | |
+| Active energy connector 2 | `Diagnostic` | kWh  || Not supported in all devices|
 | Reactive energy connector 1 | `Diagnostic` | kVarh   |:heavy_check_mark: | |
-| Reactive energy connector 2 | `Diagnostic` | kVarh   | :heavy_check_mark: | |
+| Reactive energy connector 2 | `Diagnostic` | kVarh   | | Not supported in all devices|
 | Evse power | `Diagnostic` | kW   | :heavy_check_mark: | |
 | Home power | `Diagnostic` | kW   | :heavy_check_mark: | |
 | Overload rel | `Diagnostic` |   | :heavy_check_mark: | |
 | Active power connector 1 | `Diagnostic` | kW|   :heavy_check_mark: | |
-| Active power connector 2 | `Diagnostic` | kW |   :heavy_check_mark: | |
-| Reactive power connector 1 | `Diagnostic` | kVarh|   :heavy_check_mark: | |
-| Reactive power connector 2 | `Diagnostic` | kVarh |  :heavy_check_mark: | |
+| Active power connector 2 | `Diagnostic` | kW | | Not supported in all devices |
+| Reactive power connector 1 | `Diagnostic` | kVar|   :heavy_check_mark: | |
+| Reactive power connector 2 | `Diagnostic` | kVar | | Not supported in all devices|
 | Solar and battery power | `Diagnostic` | kW |    | Only supported in solar configuration |
 | Status connector 1 | `Diagnostic` |   | :heavy_check_mark: | |
-| Status connector 2 | `Diagnostic` |   | :heavy_check_mark: | |
+| Status connector 2 | `Diagnostic` |   | | Not supported in all devices|
 | Total Current | `Diagnostic` | A |  :heavy_check_mark: | |
 | Total Power | `Diagnostic` | kW |   :heavy_check_mark: | |
-| User connector 1 | `Diagnostic` |  | :heavy_check_mark: | |
-| User connector 2 | `Diagnostic` |   | | Only supported in viaris COMBIPLUS|
+| User connector 1 | `Diagnostic` |  | | Only supported in Rfid configuration|
+| User connector 2 | `Diagnostic` |   | | Only supported in viaris COMBIPLUS Rfid|
 
 
 
