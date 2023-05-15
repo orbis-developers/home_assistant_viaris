@@ -61,7 +61,7 @@ SERIAL_PREFIX_COMBI = "EVVC4"
 MODEL_UNI = "Uni"
 MODEL_COMBIPLUS = "Combiplus"
 KVARH_UNITS: Final = "kVarh"
-KVAR_UNITS: Final = "kVar"
+# KVAR_UNITS: Final = "kVar"
 
 
 class ChargerStatusCodes:

@@ -14,7 +14,7 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 
-from homeassistant.const import UnitOfElectricCurrent, UnitOfEnergy, UnitOfPower
+from homeassistant.const import UnitOfEnergy, UnitOfPower
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -71,7 +71,7 @@ from .const import (
     USER_CONN2_KEY,
     ChargerStatusCodes,
     KVARH_UNITS,
-    KVAR_UNITS,
+    # KVAR_UNITS,
 )
 from .entity import ViarisEntity
 
@@ -154,11 +154,11 @@ def get_rel_overload(value) -> float:
     return rel_overload
 
 
-def get_total_current(value) -> float:
+def get_total_current(value) -> list[str]:
     """Extract total current."""
     data = json_loads(value)
-    total_current = round(float(data["data"]["totalCurrent"][0] / 1000), 2)
-    return total_current
+    total_current = [x / 1000 for x in data["data"]["totalCurrent"]]
+    return "[{:.2f}, {:.2f}, {:.2f}] A".format(*total_current)
 
 
 def get_ctx_detected(value) -> str:
@@ -177,43 +177,56 @@ def get_tmc100_detected(value) -> str:
     return "disable"
 
 
-def get_active_power_conn1(value) -> float:
+def get_active_power_conn1(value) -> list[str]:
     """Extract active power connector 1."""
+    # data = json_loads(value)
+    # active_power = round(float(data["data"]["elements"][0]["now"]["aPow"][0] / 1000), 2)
     data = json_loads(value)
-    active_power = round(float(data["data"]["elements"][0]["now"]["aPow"][0] / 1000), 2)
-    return active_power
+    active_power = [x / 1000 for x in data["data"]["elements"][0]["now"]["aPow"]]
+    return "[{:.2f}, {:.2f}, {:.2f}] kW".format(*active_power)
+
+    # return active_power
 
 
-def get_active_power_conn2(value) -> float:
+def get_active_power_conn2(value) -> list[str]:
     """Extract active power connector 2."""
     data = json_loads(value)
     if length_hint(data["data"]["elements"]) > 1:
-        active_power = round(
-            float(data["data"]["elements"][1]["now"]["aPow"][0] / 1000), 2
-        )
-        return active_power
+        # active_power = round(
+        # float(data["data"]["elements"][1]["now"]["aPow"][0] / 1000), 2
+        # )
+        # return active_power
+        data = json_loads(value)
+        active_power = [x / 1000 for x in data["data"]["elements"][1]["now"]["aPow"]]
+        return "[{:.2f}, {:.2f}, {:.2f}] kW".format(*active_power)
 
-    return 0.0
+    # return "disable"
 
 
-def get_reactive_power_conn1(value) -> float:
+def get_reactive_power_conn1(value) -> list[str]:
     """Extract reactive power connector 1."""
+    # data = json_loads(value)
+    # reactive_power = round(
+    # float(data["data"]["elements"][0]["now"]["rPow"][0] / 1000), 2
+    # )
+    # return reactive_power
     data = json_loads(value)
-    reactive_power = round(
-        float(data["data"]["elements"][0]["now"]["rPow"][0] / 1000), 2
-    )
-    return reactive_power
+    reactive_power = [x / 1000 for x in data["data"]["elements"][0]["now"]["rPow"]]
+    return "[{:.2f}, {:.2f}, {:.2f}] kVar".format(*reactive_power)
 
 
-def get_reactive_power_conn2(value) -> float:
+def get_reactive_power_conn2(value) -> list[str]:
     """Extract reactive power connector 2."""
     data = json_loads(value)
     if length_hint(data["data"]["elements"]) > 1:
-        reactive_power = round(
-            float(data["data"]["elements"][1]["now"]["rPow"][0] / 1000), 2
-        )
-        return reactive_power
-    return 0.0
+        # reactive_power = round(
+        # float(data["data"]["elements"][1]["now"]["rPow"][0] / 1000), 2
+        # )
+        # return reactive_power
+        data = json_loads(value)
+        reactive_power = [x / 1000 for x in data["data"]["elements"][0]["now"]["rPow"]]
+        return "[{:.2f}, {:.2f}, {:.2f}] kVar".format(*reactive_power)
+    # return "disable"
 
 
 def get_active_energy_conn1(value) -> float:
@@ -231,7 +244,7 @@ def get_active_energy_conn2(value) -> float:
             float(data["data"]["elements"][1]["now"]["active"] / 1000), 2
         )
         return active_energy
-    return 0.0
+    # return 0.0
 
 
 def get_reactive_energy_conn1(value) -> float:
@@ -252,7 +265,7 @@ def get_reactive_energy_conn2(value) -> float:
         )
         return reactive_energy
 
-    return 0.0
+    # return 0.0
 
 
 def get_state_solar(value) -> float:
@@ -339,9 +352,9 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=TOTAL_CURRENT_KEY,
         name="Total Current",
-        native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
-        device_class=SensorDeviceClass.CURRENT,
-        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:current-ac",
+        # native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
+        # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_total_current,
     ),
@@ -398,18 +411,20 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=ACTIVE_POWER_CONN1_KEY,
         name="Active power connector 1",
-        native_unit_of_measurement=UnitOfPower.KILO_WATT,
-        device_class=SensorDeviceClass.POWER,
-        state_class=SensorStateClass.MEASUREMENT,
+        # native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        # device_class=SensorDeviceClass.POWER,
+        icon="mdi:flash",
+        # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_active_power_conn1,
     ),
     ViarisSensorEntityDescription(
         key=ACTIVE_POWER_CONN2_KEY,
         name="Active power connector 2",
-        native_unit_of_measurement=UnitOfPower.KILO_WATT,
-        device_class=SensorDeviceClass.POWER,
-        state_class=SensorStateClass.MEASUREMENT,
+        # native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        # device_class=SensorDeviceClass.POWER,
+        # state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:flash",
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_active_power_conn2,
     ),
@@ -417,9 +432,9 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         key=REACTIVE_POWER_CONN2_KEY,
         icon="mdi:flash",
         name="Reactive power connector 2",
-        native_unit_of_measurement=KVAR_UNITS,
+        # native_unit_of_measurement=KVAR_UNITS,
         # device_class=SensorDeviceClass.REACTIVE_POWER,
-        state_class=SensorStateClass.MEASUREMENT,
+        # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_power_conn2,
     ),
@@ -427,9 +442,9 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         key=REACTIVE_POWER_CONN1_KEY,
         icon="mdi:flash",
         name="Reactive power connector 1",
-        native_unit_of_measurement=KVAR_UNITS,
+        # native_unit_of_measurement=KVAR_UNITS,
         # device_class=SensorDeviceClass.REACTIVE_POWER,
-        state_class=SensorStateClass.MEASUREMENT,
+        # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_power_conn1,
     ),
