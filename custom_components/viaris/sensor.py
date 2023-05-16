@@ -298,7 +298,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=ACTIVE_ENERGY_CONN1_KEY,
         icon="mdi:lightning-bolt",
-        name="Active Energy connector 1",
+        name="Active energy connector 1",
         precision=2,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -309,7 +309,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=ACTIVE_ENERGY_CONN2_KEY,
         icon="mdi:lightning-bolt",
-        name="Active Energy connector 2",
+        name="Active energy connector 2",
         precision=2,
         native_unit_of_measurement=UnitOfEnergy.KILO_WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
@@ -320,7 +320,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=REACTIVE_ENERGY_CONN1_KEY,
         icon="mdi:lightning-bolt",
-        name="Reactive Energy connector 1",
+        name="Reactive energy connector 1",
         precision=2,
         native_unit_of_measurement=KVARH_UNITS,
         # device_class=SensorDeviceClass.ENERGY,
@@ -331,7 +331,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=REACTIVE_ENERGY_CONN2_KEY,
         icon="mdi:lightning-bolt",
-        name="Reactive Energy connector 2",
+        name="Reactive energy connector 2",
         precision=2,
         native_unit_of_measurement=KVARH_UNITS,
         # device_class=SensorDeviceClass.REACTIVE_ENERGY,
@@ -341,7 +341,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ),
     ViarisSensorEntityDescription(
         key=EVSE_POWER_KEY,
-        name="Evse Power",
+        name="Evse power",
         precision=2,
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         device_class=SensorDeviceClass.POWER,
@@ -351,7 +351,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ),
     ViarisSensorEntityDescription(
         key=TOTAL_CURRENT_KEY,
-        name="Total Current",
+        name="Total current",
         icon="mdi:current-ac",
         # native_unit_of_measurement=UnitOfElectricCurrent.AMPERE,
         # state_class=SensorStateClass.MEASUREMENT,
@@ -856,7 +856,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=KEEP_ALIVE_KEY,
         icon="mdi:clock-time-two-outline",
-        name="Keep alive",
+        name="Mqtt keep alive",
         entity_category=EntityCategory.CONFIG,
         entity_registry_enabled_default=True,
         state=get_mqtt_keep_alive,
