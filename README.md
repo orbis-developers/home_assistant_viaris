@@ -1,14 +1,18 @@
 # home_assistant_viaris
 
-Home Assistant integration for monitoring Viaris EV chargers.
+Home Assistant integration for monitoring Viaris EV chargers model UNI and COMBIPLUS with mqtt protocol.
 
 ![GitHub stars](https://img.shields.io/github/stars/HGC72/homeassistant_assistant_viaris)
 ![GitHub forks](https://img.shields.io/github/forks/HGC72/homeassistant_assistant_viaris)
 ![GitHub watchers](https://img.shields.io/github/watchers/HGC72/homeassistant_assistant_viaris)
 
-## Sample view
+## List of entities view
 
-![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/d59321d6-0b74-499a-bc3a-3827f2f3aa5a)
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/5503dc6f-eab6-48a4-bba1-f91a79641f5b)
+
+## Panel example view
+
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/1dae3325-d01c-411d-baef-d84fcc1614ed)
 
 ## Installation
 
@@ -16,7 +20,17 @@ Use HACS to install this custom component.
 
 ## Configuration
 
-In order to add the viaris EV charger integration, first of all, MQTT integration must be configurated with your broker credentials. The system can discover automatically all of the devices that are connected, after switch them on and restart Home Assistant.  There is another way to add the integration using the web UI, entering your charger serial number.
+In order to add the viaris EV charger integration, first of all, MQTT integration must be configurated with your broker credentials. The system can discover automatically all of the devices that are connected, after switch them on and restart Home Assistant.  The discovery process is only done at the beginning when neither of the devices are configured. There is another way to add the integration using the web UI, entering your charger serial number.
+
+#### Discovering devices:
+
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/45061de9-a953-477f-8cd4-ebea55c8d2a9)
+
+After that you configure each device.
+
+#### Entering serial number:
+
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/465c169d-b4e3-43ec-8754-68f0a5c63567)
 
 
 ## Entities
