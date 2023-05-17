@@ -2,11 +2,18 @@
 
 Home Assistant integration for monitoring Viaris EV chargers model UNI and COMBIPLUS with mqtt protocol.
 
+[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 ![GitHub stars](https://img.shields.io/github/stars/HGC72/homeassistant_assistant_viaris)
 ![GitHub forks](https://img.shields.io/github/forks/HGC72/homeassistant_assistant_viaris)
 ![GitHub watchers](https://img.shields.io/github/watchers/HGC72/homeassistant_assistant_viaris)
 
+## Features
+
+This custom integration provides you information about your charger configuration and the states and measures necessary in order to monitor the charging process. Measures such as active/reactive power/energy, connectors states, power configuration and available analyzers are among others. 
+
 ## List of entities view
+
+This screenshot shows different entities you can chose to make your panel.
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/5503dc6f-eab6-48a4-bba1-f91a79641f5b)
 
