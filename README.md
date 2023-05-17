@@ -13,7 +13,7 @@ This custom integration provides you information about your charger configuratio
 
 ## List of entities view
 
-This screenshot shows different entities you can chose to make your panel.
+This screenshot shows different entities you can choose to make your panel.
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/5503dc6f-eab6-48a4-bba1-f91a79641f5b)
 
@@ -23,7 +23,7 @@ This screenshot shows different entities you can chose to make your panel.
 
 ## Installation
 
-Use HACS to install this custom component.
+Use HACS to install this custom component. Under HACS, choose Integrations and add the viaris custom repository.
 
 ## Configuration
 
@@ -39,8 +39,16 @@ After that you configure each device.
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/465c169d-b4e3-43ec-8754-68f0a5c63567)
 
+Installed devices
+
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/21c0c3e8-1ca0-4618-9fc0-051e6ea899e5)
+
 
 ## Entities
+
+Once your device has been configured you will see the integration entities.
+
+![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/a453e0b5-7948-4942-bfbb-6d2ad0601608)
 
 ### Sensors
 
