@@ -2,9 +2,7 @@
 
 Home Assistant integration for monitoring Viaris EV chargers model UNI and COMBIPLUS with mqtt protocol.
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
-[![GitHub stars](https://img.shields.io/github/stars/HGC72/home_assistant_viaris.svg?)](https://github.com/HGC72/home_assistant_viaris/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/HGC72/home_assistant_viaris.svg?)](https://github.com/HGC72/home_assistant_viaris/network/members)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
 ## Features
 
