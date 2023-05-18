@@ -1,20 +1,20 @@
 # home_assistant_viaris
 
-Home Assistant integration for monitoring Viaris EV chargers model UNI and COMBIPLUS with mqtt protocol.
+Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model chargers with mqtt protocol.
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 
 ## Features
 
-This custom integration provides you information about your charger configuration and the states and measures necessary in order to monitor the charging process. Measures such as active/reactive power/energy, connectors states, power configuration and available analyzers are among others. 
+This custom integration provides you information about your charger configuration and the states and measures needed to monitor the charging process. Measures such as active/reactive power/energy, connector states, power configuration and available analyzers are among others. 
 
 ## List of entities view
 
-This screenshot shows different entities you can choose to make your panel.
+This screenshot shows different entities that you can choose to make your dashboard.
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/5503dc6f-eab6-48a4-bba1-f91a79641f5b)
 
-## Panel example view
+## Dashboard example view
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/1dae3325-d01c-411d-baef-d84fcc1614ed)
 
@@ -24,13 +24,13 @@ Use HACS to install this custom component. Under HACS, choose Integrations and a
 
 ## Configuration
 
-In order to add the viaris EV charger integration, first of all, MQTT integration must be configurated with your broker credentials. The system can discover automatically all of the devices that are connected, after switch them on and restart Home Assistant.  The discovery process is only done at the beginning when neither of the devices are configured. There is another way to add the integration using the web UI, entering your charger serial number.
+To add the viaris EV charger integration, firstly the MQTT integration needs to be configured with your broker credentials. The system can automatically discover all of the devices that are connected, after switching them on and restarting Home Assistant. The discovery process is only done at the beginning when none of the devices are configured. There is another way to add the integration using the web UI, entering your charger serial number.
 
 #### Discovering devices:
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/45061de9-a953-477f-8cd4-ebea55c8d2a9)
 
-After that you configure each device.
+After that, you configure each device.
 
 #### Entering serial number:
 
@@ -43,7 +43,7 @@ Installed devices
 
 ## Entities
 
-Once your device has been configured you will see the integration entities.
+Once your device has been configured, you will see the integration entities.
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/a453e0b5-7948-4942-bfbb-6d2ad0601608)
 
