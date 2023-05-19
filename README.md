@@ -40,6 +40,7 @@ Installed devices
 
 ![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/21c0c3e8-1ca0-4618-9fc0-051e6ea899e5)
 
+After activating the integration the user must restart Home Assistant.
 
 ## Entities
 
