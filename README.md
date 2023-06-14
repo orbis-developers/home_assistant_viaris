@@ -6,7 +6,7 @@ Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model charger
 
 ## Features
 
-This custom integration provides you information about your charger configuration and the states and measures needed to monitor the charging process. Measures such as active/reactive power/energy, connector states, power configuration and available analyzers are among others. 
+The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others.
 
 ## List of entities view
 
@@ -28,7 +28,7 @@ To add the viaris EV charger integration, firstly the MQTT integration needs to 
 
 #### Discovering devices:
 
-![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/45061de9-a953-477f-8cd4-ebea55c8d2a9)
+![imagen](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/8ac0e34b-e5ee-4af8-a250-07c7dd92294a)
 
 After that, you configure each device.
 
@@ -38,7 +38,7 @@ After that, you configure each device.
 
 Installed devices
 
-![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/21c0c3e8-1ca0-4618-9fc0-051e6ea899e5)
+![imagen](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/e47f3b9b-ef70-46d3-b996-40fa22635158)
 
 After activating the integration the user must restart Home Assistant.
 
