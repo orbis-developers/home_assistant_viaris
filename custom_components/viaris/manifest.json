@@ -1,7 +1,7 @@
 {
     "domain": "viaris",
     "name": "Viaris EV charger",
-    "integration_type": "hub",
+    "integration_type": "device",
     "config_flow": true,
     "documentation": "https://github.com/orbis-developers/home_assistant_viaris",
     "issue_tracker": "https://github.com/orbis-developers/home_assistant_viaris/issues",
