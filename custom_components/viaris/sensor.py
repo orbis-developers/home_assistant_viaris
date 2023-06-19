@@ -4,6 +4,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 import logging
 from operator import length_hint
+from threading import Thread, Event
+
+import time
+
 
 from homeassistant import config_entries
 from homeassistant.components import mqtt
@@ -72,6 +76,7 @@ from .const import (
     ChargerStatusCodes,
     KVARH_UNITS,
     # KVAR_UNITS,
+    CONF_SERIAL_NUMBER,
 )
 from .entity import ViarisEntity
 
@@ -948,6 +953,7 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
     """Representation of the Viaris portal."""
 
     entity_description: ViarisSensorEntityDescription
+    thread_rt = {}
 
     def __init__(
         self,
@@ -958,17 +964,46 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
         super().__init__(config_entry, description)
 
         self.entity_description = description
+        self.serial_number = config_entry.data[CONF_SERIAL_NUMBER]
+        self.stop_event = Event()
+
+    def send_rt_frame_periodically(self):
+        """Set rt frame"""
+        while not self.stop_event.is_set():
+            value = {
+                "idTrans": 0,
+                "data": {"status": True, "period": 3, "timeout": 10000},
+            }
+            value_json = json_dumps(value)
+            mqtt.publish(self.hass, self._topic_rt_pub, value_json)
+            time.sleep(60)  # wait 60 seconds
+            # _LOGGER.info("Send rt %s", self._topic_rt_pub)
+        if self.stop_event.is_set():
+            del ViarisSensorRt.thread_rt[self.serial_number]
+            # _LOGGER.info("Free thread")
 
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
         return self._attr_native_value is not None
 
+    def stop_thread(self):
+        """Stop thread."""
+        self.stop_event.set()
+
+    async def async_will_remove_from_hass(self) -> None:
+        """Handle removal from Home Assistant."""
+        if self.serial_number in ViarisSensorRt.thread_rt:
+            self.stop_thread()
+            # _LOGGER.info("Flag stop")
+
     async def async_added_to_hass(self) -> None:
         """Publish start rt and subscribe MQTT events."""
-        # value = {"idTrans": 0, "data": {"status": True, "period": 3, "timeout": 10000}}
-        # value_json = json_dumps(value)
-        # await mqtt.async_publish(self.hass, self._topic_rt_pub, value_json)
+        if self.serial_number not in ViarisSensorRt.thread_rt:
+            ViarisSensorRt.thread_rt[self.serial_number] = Thread(
+                target=self.send_rt_frame_periodically
+            )
+            ViarisSensorRt.thread_rt[self.serial_number].start()
 
         @callback
         def message_received_rt(message):
@@ -1030,12 +1065,14 @@ class ViarisSensorConfig(ViarisEntity, SensorEntity):
         @callback
         def message_received_boot_sys(message):
             """Handle new MQTT messages."""
-            value = {
-                "idTrans": 0,
-                "data": {"status": True, "period": 3, "timeout": 10000},
-            }
-            value_json = json_dumps(value)
-            mqtt.publish(self.hass, self._topic_rt_pub, value_json)
+            topic = message.topic.split("/")
+            if topic[6] == "init_boot":
+                value = {
+                    "idTrans": 0,
+                    "data": {"status": True, "period": 3, "timeout": 10000},
+                }
+                value_json = json_dumps(value)
+                mqtt.publish(self.hass, self._topic_rt_pub, value_json)
 
             if self.entity_description.state is not None:
                 self._attr_native_value = self.entity_description.state(message.payload)
