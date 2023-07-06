@@ -36,6 +36,7 @@ from .const import (
     EVSE_POWER_KEY,
     FIRMWARE_APP_KEY,
     FV_POWER_KEY,
+    INST_POWER_KEY,
     FW_CORTEX_VERSION_KEY,
     FW_POT_VERSION_KEY,
     HARDWARE_VERSION_KEY,
@@ -282,6 +283,15 @@ def get_state_solar(value) -> float:
         return solar_pw
     return 0.0
 
+def get_inst_power(value) -> float:
+    """Extract instantaneous power."""
+
+    data = json_loads(value)
+    if "instPower" in value:
+        solar_pw = round(float(data["data"]["instPower"] / 1000), 2)
+        return solar_pw
+    return 0.0
+
 
 SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
@@ -386,9 +396,20 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:solar-power-variant",
         name="Solar and battery power",
         entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         entity_registry_enabled_default=True,
         state=get_state_solar,
+        disabled=False,
+    ),
+    ViarisSensorEntityDescription(
+        key=INST_POWER_KEY,
+        name="Instalation power",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        entity_registry_enabled_default=True,
+        state=get_inst_power,
         disabled=False,
     ),
     ViarisSensorEntityDescription(
