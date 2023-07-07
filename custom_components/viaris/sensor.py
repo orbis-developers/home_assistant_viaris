@@ -37,6 +37,8 @@ from .const import (
     FIRMWARE_APP_KEY,
     FV_POWER_KEY,
     INST_POWER_KEY,
+    GRID_IMPORT_POWER_KEY,
+    GRID_EXPORT_POWER_KEY,
     FW_CORTEX_VERSION_KEY,
     FW_POT_VERSION_KEY,
     HARDWARE_VERSION_KEY,
@@ -77,9 +79,7 @@ from .const import (
     ChargerStatusCodes,
     KVARH_UNITS,
     # KVAR_UNITS,
-    CONF_SERIAL_NUMBER,
-    GRID_IMPORT_POWER_KEY,
-    GRID_EXPORT_POWER_KEY
+    CONF_SERIAL_NUMBER
 )
 from .entity import ViarisEntity
 
@@ -294,8 +294,11 @@ def get_inst_power(value) -> float:
         return solar_pw
     return 0.0
 
-def get_home_consumption_power(value) -> float:
-    """Extract home return power."""
+def get_import_power(value) -> float:
+    """Extract import power.
+        It takes only positive values over the instalation power.
+        returns 0 if the value is negative
+    """
 
     data = json_loads(value)
     if "instPower" in value:
@@ -305,8 +308,12 @@ def get_home_consumption_power(value) -> float:
         else: return 0.0
     return 0.0
 
-def get_home_return_power(value) -> float:
-    """Extract home return power."""
+def get_export_power(value) -> float:
+    """Extract export power.
+        It takes only negative values over the instalation power.
+        returns the absolute value of the negative value
+        return 0 if the value is positive
+    """
 
     data = json_loads(value)
     if "instPower" in value:
@@ -439,21 +446,23 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
         key=GRID_IMPORT_POWER_KEY,
         name="Grid import power",
+        icon="mdi:transmission-tower-import",
         entity_category=EntityCategory.DIAGNOSTIC,
         device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         entity_registry_enabled_default=True,
-        state=get_home_consumption_power,
+        state=get_import_power,
         disabled=False,
     ),
     ViarisSensorEntityDescription(
         key=GRID_EXPORT_POWER_KEY,
         name="Grid export power",
+        icon="mdi:transmission-tower-export",
         entity_category=EntityCategory.DIAGNOSTIC,
         device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         entity_registry_enabled_default=True,
-        state=get_home_return_power,
+        state=get_export_power,
         disabled=False,
     ),
     ViarisSensorEntityDescription(
