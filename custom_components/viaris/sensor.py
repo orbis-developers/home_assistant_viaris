@@ -36,6 +36,9 @@ from .const import (
     EVSE_POWER_KEY,
     FIRMWARE_APP_KEY,
     FV_POWER_KEY,
+    INST_POWER_KEY,
+    GRID_IMPORT_POWER_KEY,
+    GRID_EXPORT_POWER_KEY,
     FW_CORTEX_VERSION_KEY,
     FW_POT_VERSION_KEY,
     HARDWARE_VERSION_KEY,
@@ -76,7 +79,7 @@ from .const import (
     ChargerStatusCodes,
     KVARH_UNITS,
     # KVAR_UNITS,
-    CONF_SERIAL_NUMBER,
+    CONF_SERIAL_NUMBER
 )
 from .entity import ViarisEntity
 
@@ -282,6 +285,44 @@ def get_state_solar(value) -> float:
         return solar_pw
     return 0.0
 
+def get_inst_power(value) -> float:
+    """Extract instantaneous power."""
+
+    data = json_loads(value)
+    if "instPower" in value:
+        solar_pw = round(float(data["data"]["instPower"] / 1000), 2)
+        return solar_pw
+    return 0.0
+
+def get_import_power(value) -> float:
+    """Extract import power.
+        It takes only positive values over the instalation power.
+        returns 0 if the value is negative
+    """
+
+    data = json_loads(value)
+    if "instPower" in value:
+        inst_pw = round(float(data["data"]["instPower"] / 1000), 2)
+        if inst_pw > 0:
+            return inst_pw
+        else: return 0.0
+    return 0.0
+
+def get_export_power(value) -> float:
+    """Extract export power.
+        It takes only negative values over the instalation power.
+        returns the absolute value of the negative value
+        return 0 if the value is positive
+    """
+
+    data = json_loads(value)
+    if "instPower" in value:
+        inst_pw = round(float(data["data"]["instPower"] / 1000), 2)
+        if inst_pw <= 0:
+            return abs(inst_pw)
+        else: return 0.0
+    return 0.0
+
 
 SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
@@ -386,9 +427,42 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:solar-power-variant",
         name="Solar and battery power",
         entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.POWER,
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         entity_registry_enabled_default=True,
         state=get_state_solar,
+        disabled=False,
+    ),
+    ViarisSensorEntityDescription(
+        key=INST_POWER_KEY,
+        name="Instalation power",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        entity_registry_enabled_default=True,
+        state=get_inst_power,
+        disabled=False,
+    ),
+    ViarisSensorEntityDescription(
+        key=GRID_IMPORT_POWER_KEY,
+        name="Grid import power",
+        icon="mdi:transmission-tower-import",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        entity_registry_enabled_default=True,
+        state=get_import_power,
+        disabled=False,
+    ),
+    ViarisSensorEntityDescription(
+        key=GRID_EXPORT_POWER_KEY,
+        name="Grid export power",
+        icon="mdi:transmission-tower-export",
+        entity_category=EntityCategory.DIAGNOSTIC,
+        device_class=SensorDeviceClass.POWER,
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        entity_registry_enabled_default=True,
+        state=get_export_power,
         disabled=False,
     ),
     ViarisSensorEntityDescription(
