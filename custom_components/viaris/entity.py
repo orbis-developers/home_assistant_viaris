@@ -49,6 +49,8 @@ class ViarisEntity(Entity):
             self._topic_evsm_mennekes_pub = f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/value/evsm/mennekes"
             self._topic_evsm_mennekes_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/evt/evsm/mennekes"
             self._topic_evsm_menek_value_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/value/evsm/mennekes"
+            self._topic_startstop_conn1_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/mennekes"
+            self._topic_startstop_conn2_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/schuko"
         else:
             self._model = MODEL_COMBIPLUS
             self._topic_evsm_mennekes_pub = f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/value/evsm/mennekes1"
@@ -57,6 +59,8 @@ class ViarisEntity(Entity):
             self._topic_evsm_mennekes2_pub = f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/value/evsm/mennekes2"
             self._topic_evsm_mennekes2_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/evt/evsm/mennekes2"
             self._topic_evsm_menek2_value_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/value/evsm/mennekes2"
+            self._topic_startstop_conn1_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/mennekes1"
+            self._topic_startstop_conn2_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/mennekes2"
 
         # self._topic_evsm_schuko_pub = f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/value/evsm/schuko"
         # self._topic_evsm_schuko_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/evt/evsm/schuko"

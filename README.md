@@ -1,18 +1,18 @@
 # home_assistant_viaris
 
-Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model chargers with mqtt protocol.
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)   ![GitHub all releases](https://img.shields.io/github/downloads/orbis-developers/home_assistant_viaris/total)
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
+Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model chargers with mqtt protocol.
 
 ## Features
 
-The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others.
+The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others. Besides, users have the possibility of starting and stopping the charge in each connector.
 
 ## List of entities view
 
 This screenshot shows different entities that you can choose to make your dashboard.
 
-![imagen](https://github.com/HGC72/home_assistant_viaris/assets/66405397/5503dc6f-eab6-48a4-bba1-f91a79641f5b)
+![image](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/c8373582-edf8-451e-a36d-271f228d2720)
 
 ## Dashboard example view
 
@@ -52,8 +52,8 @@ Once your device has been configured, you will see the integration entities.
 
 | Friendly name | Category | Units | Supported | Unsupported reason |
 | ------------- | -------- | ----- | --------- | ------------------ |
-| Contax D0613  | `config` |       | :heavy_check_mark: |  | 
-| Ethernet | `config` |  | :heavy_check_mark: | |  
+| Contax D0613  | `config` |       | :heavy_check_mark: |  |
+| Ethernet | `config` |  | :heavy_check_mark: | |
 | Firmware application version | `config` |   | :heavy_check_mark: | |
 | Firmware cortex version | `config` |   | :heavy_check_mark: | |
 | Firmware application version | `config` |   | :heavy_check_mark: |  |
@@ -99,13 +99,12 @@ Once your device has been configured, you will see the integration entities.
 | User connector 1 | `Diagnostic` |  | | Only supported in Rfid configuration|
 | User connector 2 | `Diagnostic` |   | | Only supported in viaris COMBIPLUS Rfid|
 
+### Switches
 
-
-
-
-
-
-
+| Friendly name | Category | Supported | Unsupported reason |
+| ------------- | -------- | ----- | ------------------ |
+| Start connector 1 charging | `config` | :heavy_check_mark: | |
+| Start connector 2 charging | `config` | :heavy_check_mark: | |
 
 
 

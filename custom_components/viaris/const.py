@@ -61,7 +61,8 @@ SERIAL_PREFIX_COMBI = "EVVC4"
 MODEL_UNI = "Uni"
 MODEL_COMBIPLUS = "Combiplus"
 KVARH_UNITS: Final = "kVarh"
-# KVAR_UNITS: Final = "kVar"
+START_STOP_CONN1_KEY = "start_stop_conn1"
+START_STOP_CONN2_KEY = "start_stop_conn2"
 
 
 class ChargerStatusCodes:
@@ -70,8 +71,8 @@ class ChargerStatusCodes:
     mennekes = {
         0: "Standby",
         1: "Disconnected",
-        2: "Disconnected without permission",
-        3: "Connected ",
+        2: "Connected without permission",
+        3: "Connected",
         4: "Connected with permission",
         5: "Charging",
         6: "Charging: power limit",
