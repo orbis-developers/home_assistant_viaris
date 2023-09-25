@@ -39,16 +39,16 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up integration."""
     # Make sure MQTT is available and the entry is loaded
 
-    if not hass.config_entries.async_entries(
-        mqtt.DOMAIN
-    ) or not await hass.config_entries.async_wait_component(
-        hass.config_entries.async_entries(mqtt.DOMAIN)[0]
-    ):
-        _LOGGER.error("MQTT integration is not available")
-        return False
-        # return True
+    # if not hass.config_entries.async_entries(
+    # mqtt.DOMAIN
+    # ) or not await hass.config_entries.async_wait_component(
+    # hass.config_entries.async_entries(mqtt.DOMAIN)[0]
+    # ):
+    # _LOGGER.error("MQTT integration is not available")
+    # return False
+    # return True
 
-    _LOGGER.info("MQTT integration available")
+    # _LOGGER.info("MQTT integration available")
     return True
 
 
