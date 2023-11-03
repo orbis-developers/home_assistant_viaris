@@ -71,7 +71,7 @@ class ChargerStatusCodes:
     mennekes = {
         0: "Standby",
         1: "Disconnected",
-        2: "Connected without permission",
+        2: "Disconnected with permission",
         3: "Connected",
         4: "Connected with permission",
         5: "Charging",
