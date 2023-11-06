@@ -52,34 +52,34 @@ Once your device has been configured, you will see the integration entities.
 
 | Friendly name | Category | Units | Supported | Unsupported reason |
 | ------------- | -------- | ----- | --------- | ------------------ |
-| Contax D0613  | `config` |       | :heavy_check_mark: |  |
-| Ethernet | `config` |  | :heavy_check_mark: | |
-| Firmware application version | `config` |   | :heavy_check_mark: | |
-| Firmware cortex version | `config` |   | :heavy_check_mark: | |
-| Firmware application version | `config` |   | :heavy_check_mark: |  |
-| Hardware power version | `config` |   | :heavy_check_mark: | |
-| Hardware version | `config` |   | :heavy_check_mark: |  |
-| Keep alive | `config` |  | :heavy_check_mark: |  |
-| Limit power | `config` | kW  | :heavy_check_mark: | |
-| Mac | `config` |   | :heavy_check_mark: | |
-| Max power | `config` | kW  | :heavy_check_mark: | |
-| Modbus | `config` |   | :heavy_check_mark: | |
-| Model | `config` |   | :heavy_check_mark: | |
-| Mqtt clien Id | `config` |   | :heavy_check_mark: | |
-| Mqtt pin Interval | `config` |  | :heavy_check_mark: | |
-| Mqtt port | `config` |   | :heavy_check_mark: | |
-| Mqtt QoS | `config` |   | :heavy_check_mark: | |
-| Mqtt clien Id | `config` |   | :heavy_check_mark: | |
-| Mqtt URL | `config` |   | :heavy_check_mark: | |
-| Mqtt user | `config` |   | :heavy_check_mark: | |
-| Ocpp | `config` |   | :heavy_check_mark: | |
-| Rfid | `config` |   | :heavy_check_mark: | |
-| Schuko present | `config` |   | :heavy_check_mark: | |
-| Selector power| `config` |   | :heavy_check_mark: | |
-| Serial | `config` |   | :heavy_check_mark: | |
-| Solar | `config` |   | :heavy_check_mark: | |
-| Spl | `config` |   | :heavy_check_mark: | |
-| TMC100 | `config` |   | :heavy_check_mark: | |
+| Contax D0613  |   |       | :heavy_check_mark: |  |
+| Ethernet |   |  | :heavy_check_mark: | |
+| Firmware application version |   |   | :heavy_check_mark: | |
+| Firmware cortex version |   |   | :heavy_check_mark: | |
+| Firmware application version |   |   | :heavy_check_mark: |  |
+| Hardware power version |   |   | :heavy_check_mark: | |
+| Hardware version |   |   | :heavy_check_mark: |  |
+| Keep alive |   |  | :heavy_check_mark: |  |
+| Limit power |   | kW  | :heavy_check_mark: | |
+| Mac |   |   | :heavy_check_mark: | |
+| Max power |   | kW  | :heavy_check_mark: | |
+| Modbus |   |   | :heavy_check_mark: | |
+| Model |   |   | :heavy_check_mark: | |
+| Mqtt clien Id |   |   | :heavy_check_mark: | |
+| Mqtt pin Interval |   |  | :heavy_check_mark: | |
+| Mqtt port |   |   | :heavy_check_mark: | |
+| Mqtt QoS |   |   | :heavy_check_mark: | |
+| Mqtt clien Id |  |   | :heavy_check_mark: | |
+| Mqtt URL |   |   | :heavy_check_mark: | |
+| Mqtt user |   |   | :heavy_check_mark: | |
+| Ocpp |   |   | :heavy_check_mark: | |
+| Rfid |   |   | :heavy_check_mark: | |
+| Schuko present |   |   | :heavy_check_mark: | |
+| Selector power|   |   | :heavy_check_mark: | |
+| Serial |   |   | :heavy_check_mark: | |
+| Solar |   |   | :heavy_check_mark: | |
+| Spl |   |   | :heavy_check_mark: | |
+| TMC100 |   |   | :heavy_check_mark: | |
 | Active energy connector 1 | `Diagnostic` | kWh   | :heavy_check_mark: | |
 | Active energy connector 2 | `Diagnostic` | kWh  || Not supported in all devices|
 | Reactive energy connector 1 | `Diagnostic` | kVarh   |:heavy_check_mark: | |
