@@ -70,7 +70,7 @@ class ViarisEntity(Entity):
             f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/boot/sys"
         )
         self._topic_boot_sys_subs = (
-            f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/boot/sys"
+            f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/streamrt/modulator"
         )
         self._topic_init_boot_sys_subs = (
             f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/init_boot/sys"
