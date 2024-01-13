@@ -73,6 +73,7 @@ from .const import (
     TOTAL_POWER_KEY,
     USER_CONN1_KEY,
     USER_CONN2_KEY,
+    MAX_CONFIGURED_POWER_KEY,
     ChargerStatusCodes,
     KVARH_UNITS,
     # KVAR_UNITS,
@@ -282,6 +283,11 @@ def get_state_solar(value) -> float:
         return solar_pw
     return 0.0
 
+def get_max_power(value) -> float:
+    """Extract max power."""
+    data = json_loads(value)
+    read_value = round(float(data["data"]["maxPower"] / 1000), 2)
+    return read_value
 
 SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
@@ -452,6 +458,17 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_power_conn1,
+    ),
+    ViarisSensorEntityDescription(
+        key=MAX_CONFIGURED_POWER_KEY,
+        name="Max configured power",
+        native_unit_of_measurement=UnitOfPower.KILO_WATT,
+        device_class=SensorDeviceClass.POWER,
+        state_class=SensorStateClass.MEASUREMENT,
+        state=get_max_power,
+        entity_category=None,
+        entity_registry_enabled_default=True,
+        disabled=False,
     ),
 )
 
