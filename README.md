@@ -80,6 +80,7 @@ Once your device has been configured, you will see the integration entities.
 | Solar |   |   | :heavy_check_mark: | |
 | Spl |   |   | :heavy_check_mark: | |
 | TMC100 |   |   | :heavy_check_mark: | |
+| Current max power |   | kW  | :heavy_check_mark: | |
 | Active energy connector 1 | `Diagnostic` | kWh   | :heavy_check_mark: | |
 | Active energy connector 2 | `Diagnostic` | kWh  || Not supported in all devices|
 | Reactive energy connector 1 | `Diagnostic` | kVarh   |:heavy_check_mark: | |
