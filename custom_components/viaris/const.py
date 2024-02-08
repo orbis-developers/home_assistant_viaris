@@ -64,6 +64,11 @@ MODEL_COMBIPLUS = "Combiplus"
 KVARH_UNITS: Final = "kVarh"
 START_STOP_CONN1_KEY = "start_stop_conn1"
 START_STOP_CONN2_KEY = "start_stop_conn2"
+CURRENT_LIMIT_CONN1_KEY = "curr_lim_conn1"
+CURRENT_LIMIT_CONN2_KEY = "curr_lim_conn2"
+STATE_CHARGING = 5
+STATE_CHARGING_POWER_LIMIT = 6
+STATE_PAUSED_CHARGING = 7
 
 
 class ChargerStatusCodes:

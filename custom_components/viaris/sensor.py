@@ -4,10 +4,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 import logging
 from operator import length_hint
-from threading import Thread, Event
-
+from threading import Event, Thread
 import time
-
 
 from homeassistant import config_entries
 from homeassistant.components import mqtt
@@ -17,7 +15,6 @@ from homeassistant.components.sensor import (
     SensorEntityDescription,
     SensorStateClass,
 )
-
 from homeassistant.const import UnitOfEnergy, UnitOfPower
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import EntityCategory
@@ -31,7 +28,10 @@ from .const import (
     ACTIVE_ENERGY_CONN2_KEY,
     ACTIVE_POWER_CONN1_KEY,
     ACTIVE_POWER_CONN2_KEY,
+    # KVAR_UNITS,
+    CONF_SERIAL_NUMBER,
     CONTAX_D0613_KEY,
+    CURRENT_MAX_POWER_KEY,
     ETHERNET_KEY,
     EVSE_POWER_KEY,
     FIRMWARE_APP_KEY,
@@ -42,6 +42,7 @@ from .const import (
     HOME_POWER_KEY,
     HW_POT_VERSION_KEY,
     KEEP_ALIVE_KEY,
+    KVARH_UNITS,
     LIMIT_POWER_KEY,
     MAC_KEY,
     MAX_POWER_KEY,
@@ -73,11 +74,7 @@ from .const import (
     TOTAL_POWER_KEY,
     USER_CONN1_KEY,
     USER_CONN2_KEY,
-    CURRENT_MAX_POWER_KEY,
     ChargerStatusCodes,
-    KVARH_UNITS,
-    # KVAR_UNITS,
-    CONF_SERIAL_NUMBER,
 )
 from .entity import ViarisEntity
 
@@ -283,11 +280,13 @@ def get_state_solar(value) -> float:
         return solar_pw
     return 0.0
 
+
 def get_max_power(value) -> float:
     """Extract max power."""
     data = json_loads(value)
     read_value = round(float(data["data"]["maxPower"] / 1000), 2)
     return read_value
+
 
 SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ViarisSensorEntityDescription(
@@ -459,7 +458,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_power_conn1,
     ),
-        ViarisSensorEntityDescription(
+    ViarisSensorEntityDescription(
         key=CURRENT_MAX_POWER_KEY,
         name="Current max power",
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
@@ -985,7 +984,7 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
         self.stop_event = Event()
 
     def send_rt_frame_periodically(self):
-        """Set rt frame"""
+        """Set rt frame."""
         while not self.stop_event.is_set():
             value = {
                 "idTrans": 0,

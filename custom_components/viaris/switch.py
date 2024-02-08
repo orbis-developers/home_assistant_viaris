@@ -1,22 +1,19 @@
-"""Switches for viaris"""
+"""Switches for viaris."""
 from __future__ import annotations
 
 from dataclasses import dataclass
 import logging
 
-from .const import (
-    START_STOP_CONN1_KEY,
-    START_STOP_CONN2_KEY,
-    CONF_SERIAL_NUMBER,
-)
-from homeassistant.components.switch import SwitchEntityDescription, SwitchEntity
-from homeassistant.helpers.entity import EntityCategory
-from homeassistant.core import HomeAssistant, callback
 from homeassistant import config_entries
 from homeassistant.components import mqtt
-from .entity import ViarisEntity
-from . import ViarisEntityDescription
+from homeassistant.components.switch import SwitchEntity, SwitchEntityDescription
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.json import json_dumps
+
+from . import ViarisEntityDescription
+from .const import CONF_SERIAL_NUMBER, START_STOP_CONN1_KEY, START_STOP_CONN2_KEY
+from .entity import ViarisEntity
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -80,10 +77,7 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
 
         self.entity_description = description
         self._optimistic = self.entity_description.optimistic
-        if (
-            self.entity_description.key == START_STOP_CONN1_KEY
-            or self.entity_description.key == START_STOP_CONN2_KEY
-        ):
+        if self.entity_description.key in (START_STOP_CONN1_KEY, START_STOP_CONN2_KEY):
             self._available = True
         self.serial_number = config_entry.data[CONF_SERIAL_NUMBER]
 
@@ -93,7 +87,7 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
         return self._available
 
     def set_available(self, value):
-        """Set value"""
+        """Set value."""
         self._available = value
 
     @property
@@ -130,20 +124,19 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
                 # Optimistically assume that switch has changed state.
                 self._attr_is_on = True
             self.async_write_ha_state()
-        else:
-            if self.entity_description.key == START_STOP_CONN2_KEY:
-                await mqtt.async_publish(
-                    self.hass,
-                    self._topic_startstop_conn2_pub,
-                    self.entity_description.payload_on,
-                )
-                _LOGGER.info(self._topic_startstop_conn2_pub)
-                _LOGGER.info(self.entity_description.payload_on)
+        elif self.entity_description.key == START_STOP_CONN2_KEY:
+            await mqtt.async_publish(
+                self.hass,
+                self._topic_startstop_conn2_pub,
+                self.entity_description.payload_on,
+            )
+            _LOGGER.info(self._topic_startstop_conn2_pub)
+            _LOGGER.info(self.entity_description.payload_on)
 
-                if self._optimistic:
-                    # Optimistically assume that switch has changed state.
-                    self._attr_is_on = True
-                self.async_write_ha_state()
+            if self._optimistic:
+                # Optimistically assume that switch has changed state.
+                self._attr_is_on = True
+            self.async_write_ha_state()
 
     async def async_turn_off(self, **kwargs):
         """Turn the switch off."""
@@ -174,20 +167,20 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
                 # Optimistically assume that switch has changed state.
                 self._attr_is_on = False
             self.async_write_ha_state()
-        else:
-            if self.entity_description.key == START_STOP_CONN2_KEY:
-                await mqtt.async_publish(
-                    self.hass,
-                    self._topic_startstop_conn2_pub,
-                    self.entity_description.payload_off,
-                )
-                _LOGGER.info(self._topic_startstop_conn2_pub)
-                _LOGGER.info(self.entity_description.payload_off)
+        elif self.entity_description.key == START_STOP_CONN2_KEY:
+            await mqtt.async_publish(
+                self.hass,
+                self._topic_startstop_conn2_pub,
+                self.entity_description.payload_off,
+            )
+            _LOGGER.info(self._topic_startstop_conn2_pub)
+            _LOGGER.info(self.entity_description.payload_off)
 
-                if self._optimistic:
-                    # Optimistically assume that switch has changed state.
-                    self._attr_is_on = False
-                self.async_write_ha_state()
+            if self._optimistic:
+                # Optimistically assume that switch has changed state.
+                self._attr_is_on = False
+            self.async_write_ha_state()
 
     async def async_added_to_hass(self):
+        """Add to hass."""
         self.async_write_ha_state()

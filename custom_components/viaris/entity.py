@@ -10,8 +10,8 @@ from .const import (  # CONF_TOPIC_PREFIX,
     CONF_SERIAL_NUMBER,
     DEFAULT_TOPIC_PREFIX,
     DEVICE_INFO_MANUFACTURER,
-    DEVICE_INFO_MODEL_UNI,
     DEVICE_INFO_MODEL_COMBIPLUS,
+    DEVICE_INFO_MODEL_UNI,
     DOMAIN,
     MODEL_COMBIPLUS,
     MODEL_UNI,
@@ -51,6 +51,9 @@ class ViarisEntity(Entity):
             self._topic_evsm_menek_value_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/value/evsm/mennekes"
             self._topic_startstop_conn1_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/mennekes"
             self._topic_startstop_conn2_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/schuko"
+            self._topic_set_current_conn1 = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/value/mennekes"
+            self._topic_get_conf_conn1 = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/cfg/mennekes"
+            self._topic_stat_conf_conn1 = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/cfg/mennekes"
         else:
             self._model = MODEL_COMBIPLUS
             self._topic_evsm_mennekes_pub = f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/value/evsm/mennekes1"
@@ -61,6 +64,12 @@ class ViarisEntity(Entity):
             self._topic_evsm_menek2_value_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/value/evsm/mennekes2"
             self._topic_startstop_conn1_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/mennekes1"
             self._topic_startstop_conn2_pub = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/request/reqman/mennekes2"
+            self._topic_set_current_conn1 = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/value/mennekes1"
+            self._topic_set_current_conn2 = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/value/mennekes2"
+            self._topic_get_conf_conn1 = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/cfg/mennekes1"
+            self._topic_get_conf_conn2 = f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/cfg/mennekes2"
+            self._topic_stat_conf_conn1 = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/cfg/mennekes1"
+            self._topic_stat_conf_conn2 = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/cfg/mennekes2"
 
         # self._topic_evsm_schuko_pub = f"{topic_prefix}0{serial_number[-5:]}/get/0/{serial_number}/value/evsm/schuko"
         # self._topic_evsm_schuko_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/evt/evsm/schuko"

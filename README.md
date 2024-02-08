@@ -6,7 +6,7 @@ Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model charger
 
 ## Features
 
-The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others. Besides, users have the possibility of starting and stopping the charge in each connector.
+The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others. Besides, users have the possibility of starting and stopping the charge and changing the current in each connector
 
 ## List of entities view
 
@@ -106,6 +106,12 @@ Once your device has been configured, you will see the integration entities.
 | ------------- | -------- | ----- | ------------------ |
 | Start connector 1 charging | `config` | :heavy_check_mark: | |
 | Start connector 2 charging | `config` | :heavy_check_mark: | |
+
+### Numbers
+| Friendly name | Category | Supported | Unsupported reason |
+| ------------- | -------- | ----- | ------------------ |
+| Current limit connector 1 | `control` | :heavy_check_mark: |Only when device is charging  |
+| Current limit connector 2 | `control` | :heavy_check_mark: |Only when device is charging. Supported in viaris COMBIPLUS|
 
 
 
