@@ -121,12 +121,12 @@ Once your device has been configured, you will see the integration entities.
 | Start connector 2 charging | `config` | :heavy_check_mark: | |
 
 ### Numbers
-| Friendly name | Category | Supported | Unsupported reason |
-| ------------- | -------- | ----- | ------------------ |
-| Current limit connector 1 | `control` | :heavy_check_mark: ||
-| Current limit connector 2 | `control` | :heavy_check_mark: |Supported in viaris COMBIPLUS|
-| Rt frame period| `control` | :heavy_check_mark: ||
-| Rt frame timeout| `control` | :heavy_check_mark: ||
+| Friendly name | Category | Units | Supported | Unsupported reason |
+| ------------- | -------- | ----- | --------- | ------------------ |
+| Current limit connector 1 | `control` | A | :heavy_check_mark: ||
+| Current limit connector 2 | `control` | A | :heavy_check_mark: |Supported in viaris COMBIPLUS|
+| Rt frame period| `control` | s | :heavy_check_mark: ||
+| Rt frame timeout| `control` | s | :heavy_check_mark: ||
 
 ### Button
 | Friendly name | Category | Supported | Unsupported reason |
