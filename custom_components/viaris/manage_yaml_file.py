@@ -12,7 +12,9 @@ class ConfigurationManager:
 
     def __init__(self, serial) -> None:
         "Init configuration manager."
-        self.file_path = os.path.join(os.getcwd(), "configuration_viaris.yaml")
+        self.file_path = os.path.join(
+            "custom_components/viaris", "configuration_viaris.yaml"
+        )
         self.serial_number = serial
         if not os.path.exists(self.file_path):
             _LOGGER.info("Creating new configuration file.")
