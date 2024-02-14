@@ -77,6 +77,7 @@ from .const import (
     ChargerStatusCodes,
 )
 from .entity import ViarisEntity
+from .number import numbers_buffer
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -986,17 +987,33 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
     def send_rt_frame_periodically(self):
         """Set rt frame."""
         while not self.stop_event.is_set():
-            value = {
-                "idTrans": 0,
-                "data": {"status": True, "period": 3, "timeout": 10000},
-            }
-            value_json = json_dumps(value)
-            mqtt.publish(self.hass, self._topic_rt_pub, value_json)
-            time.sleep(60)  # wait 60 seconds
-            # _LOGGER.info("Send rt %s", self._topic_rt_pub)
+            if self.serial_number in numbers_buffer:
+                period_value = 3
+                timeout_value = -1
+                for entity in numbers_buffer[self.serial_number]:
+                    if (
+                        entity.entity_id
+                        == f"number.{self.serial_number.lower()}_period_rt"
+                    ):
+                        period_value = entity.state
+                    elif (
+                        entity.entity_id
+                        == f"number.{self.serial_number.lower()}_timeout_rt"
+                    ):
+                        timeout_value = entity.state
+                value = {
+                    "idTrans": 0,
+                    "data": {
+                        "status": True,
+                        "period": period_value,
+                        "timeout": timeout_value,
+                    },
+                }
+                value_json = json_dumps(value)
+                mqtt.publish(self.hass, self._topic_rt_pub, value_json)
+                time.sleep(1000)  # wait 1000 seconds
         if self.stop_event.is_set():
             del ViarisSensorRt.thread_rt[self.serial_number]
-            # _LOGGER.info("Free thread")
 
     @property
     def available(self) -> bool:
@@ -1011,7 +1028,6 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
         """Handle removal from Home Assistant."""
         if self.serial_number in ViarisSensorRt.thread_rt:
             self.stop_thread()
-            # _LOGGER.info("Flag stop")
 
     async def async_added_to_hass(self) -> None:
         """Publish start rt and subscribe MQTT events."""
@@ -1043,7 +1059,6 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
                         self._attr_icon = "mdi:ev-plug-type2"
                     else:
                         self._attr_icon = "mdi:power-socket-de"
-                    # _LOGGER.info(self._attr_native_value)
 
             self.async_write_ha_state()
 
@@ -1069,6 +1084,7 @@ class ViarisSensorConfig(ViarisEntity, SensorEntity):
         super().__init__(config_entry, description)
 
         self.entity_description = description
+        self.serial_number = config_entry.data[CONF_SERIAL_NUMBER]
 
     @property
     def available(self) -> bool:
@@ -1083,12 +1099,19 @@ class ViarisSensorConfig(ViarisEntity, SensorEntity):
             """Handle new MQTT messages."""
             topic = message.topic.split("/")
             if topic[6] == "init_boot":
-                value = {
-                    "idTrans": 0,
-                    "data": {"status": True, "period": 3, "timeout": 10000},
-                }
-                value_json = json_dumps(value)
-                mqtt.publish(self.hass, self._topic_rt_pub, value_json)
+                if self.serial_number in numbers_buffer:
+                    period_value = 3
+                    timeout_value = -1
+                    value = {
+                        "idTrans": 0,
+                        "data": {
+                            "status": True,
+                            "period": period_value,
+                            "timeout": timeout_value,
+                        },
+                    }
+                    value_json = json_dumps(value)
+                    mqtt.publish(self.hass, self._topic_rt_pub, value_json)
 
             if self.entity_description.state is not None:
                 self._attr_native_value = self.entity_description.state(message.payload)
@@ -1142,7 +1165,6 @@ class ViarisSensorMennekes(ViarisEntity, SensorEntity):
             """Handle new MQTT messages."""
             if self.entity_description.state is not None:
                 self._attr_native_value = self.entity_description.state(message.payload)
-
             else:
                 self._attr_native_value = message.payload
 

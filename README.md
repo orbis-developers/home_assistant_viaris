@@ -6,7 +6,20 @@ Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model charger
 
 ## Features
 
-The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others. Besides, users have the possibility of starting and stopping the charge and changing the current in each connector
+The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others.
+
+Users have the possibility of starting and stopping the charge.
+
+![image](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/5efeec4d-229f-4dd2-9712-7c4b0cecfefd)
+
+Current charging from the connector can be changed. This value is not retained upon charger restart and it is internally subject to the safety limitations of the charger.
+
+![image](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/d5151d27-d1f6-4e32-9e86-eb35a3946665)
+
+Configurable data update time with the Rt frame entities. Timeout = -1 means data reporting always and period indicates how often they are updated. Our recommendation is a period of 3 seconds.
+
+![image](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/e72d555b-878a-481b-965f-67fa157d27b0)
+
 
 ## List of entities view
 
@@ -110,8 +123,16 @@ Once your device has been configured, you will see the integration entities.
 ### Numbers
 | Friendly name | Category | Supported | Unsupported reason |
 | ------------- | -------- | ----- | ------------------ |
-| Current limit connector 1 | `control` | :heavy_check_mark: |Only when device is charging  |
-| Current limit connector 2 | `control` | :heavy_check_mark: |Only when device is charging. Supported in viaris COMBIPLUS|
+| Current limit connector 1 | `control` | :heavy_check_mark: ||
+| Current limit connector 2 | `control` | :heavy_check_mark: |Supported in viaris COMBIPLUS|
+| Rt frame period| `control` | :heavy_check_mark: ||
+| Rt frame timeout| `control` | :heavy_check_mark: ||
+
+### Button
+| Friendly name | Category | Supported | Unsupported reason |
+| ------------- | -------- | ----- | ------------------ |
+| Send rt config | `config` | :heavy_check_mark: | |
+
 
 
 

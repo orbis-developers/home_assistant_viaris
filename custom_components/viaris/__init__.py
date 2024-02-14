@@ -11,11 +11,12 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityDescription
 from homeassistant.helpers.typing import ConfigType
 
-from .const import DOMAIN
+from .const import CONF_SERIAL_NUMBER, DOMAIN
+from .manage_yaml_file import ConfigurationManager
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS = [Platform.NUMBER, Platform.SENSOR, Platform.SWITCH]
+PLATFORMS = [Platform.BUTTON, Platform.NUMBER, Platform.SENSOR, Platform.SWITCH]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -28,6 +29,11 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
     hass.data.setdefault(DOMAIN, {})
     if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
+        serial_number = entry.data.get(CONF_SERIAL_NUMBER)
+        config_manager = ConfigurationManager(serial_number)
+        configuration = config_manager.load_configuration()
+        del configuration["devices"][serial_number]
+        config_manager.save_configuration(configuration)
         _LOGGER.info("Unload entry OK")
     else:
         _LOGGER.info("Unload entry not OK")

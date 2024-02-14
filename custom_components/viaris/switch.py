@@ -117,8 +117,6 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
                 self._topic_startstop_conn1_pub,
                 self.entity_description.payload_on,
             )
-            _LOGGER.info(self._topic_startstop_conn1_pub)
-            _LOGGER.info(self.entity_description.payload_on)
 
             if self._optimistic:
                 # Optimistically assume that switch has changed state.
@@ -130,8 +128,6 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
                 self._topic_startstop_conn2_pub,
                 self.entity_description.payload_on,
             )
-            _LOGGER.info(self._topic_startstop_conn2_pub)
-            _LOGGER.info(self.entity_description.payload_on)
 
             if self._optimistic:
                 # Optimistically assume that switch has changed state.
@@ -160,8 +156,6 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
                 self._topic_startstop_conn1_pub,
                 self.entity_description.payload_off,
             )
-            _LOGGER.info(self._topic_startstop_conn1_pub)
-            _LOGGER.info(self.entity_description.payload_off)
 
             if self._optimistic:
                 # Optimistically assume that switch has changed state.
@@ -173,8 +167,6 @@ class ViarisSwitch(ViarisEntity, SwitchEntity):
                 self._topic_startstop_conn2_pub,
                 self.entity_description.payload_off,
             )
-            _LOGGER.info(self._topic_startstop_conn2_pub)
-            _LOGGER.info(self.entity_description.payload_off)
 
             if self._optimistic:
                 # Optimistically assume that switch has changed state.
