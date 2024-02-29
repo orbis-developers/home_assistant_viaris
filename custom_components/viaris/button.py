@@ -36,6 +36,7 @@ BUTTONS: tuple[ViarisrButtonEntityDescription, ...] = (
         name="Send rt config",
         device_class=ButtonDeviceClass.UPDATE,
         entity_category=EntityCategory.CONFIG,
+        translation_key="send_cfg_rt",
     ),
 )
 

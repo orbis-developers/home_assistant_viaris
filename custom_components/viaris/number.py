@@ -53,6 +53,7 @@ NUMBERS: tuple[ViarisNumberEntityDescription, ...] = (
         native_min_value=6,
         mode=NumberMode.SLIDER,
         native_step=0.1,
+        translation_key="curr_lim_conn1",
     ),
     ViarisNumberEntityDescription(
         key=CURRENT_LIMIT_CONN2_KEY,
@@ -64,6 +65,7 @@ NUMBERS: tuple[ViarisNumberEntityDescription, ...] = (
         native_min_value=6,
         mode=NumberMode.SLIDER,
         native_step=0.1,
+        translation_key="curr_lim_conn2",
     ),
     ViarisNumberEntityDescription(
         key=PERIOD_RT_KEY,
@@ -75,6 +77,7 @@ NUMBERS: tuple[ViarisNumberEntityDescription, ...] = (
         native_min_value=1,
         mode=NumberMode.BOX,
         native_step=1,
+        translation_key="period_rt",
     ),
     ViarisNumberEntityDescription(
         key=TIMEOUT_RT_KEY,
@@ -86,6 +89,7 @@ NUMBERS: tuple[ViarisNumberEntityDescription, ...] = (
         native_min_value=-1,
         mode=NumberMode.BOX,
         native_step=1,
+        translation_key="timeout_rt",
     ),
 )
 

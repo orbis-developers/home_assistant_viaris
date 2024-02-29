@@ -1,0 +1,249 @@
+{
+    "entity": {
+      "sensor": {
+        "active_en_con1": {
+          "default": "mdi:lightning-bolt"
+        },
+        "active_en_con2": {
+          "default": "mdi:lightning-bolt"
+        },
+        "reactive_en_con1": {
+          "default": "mdi:lightning-bolt"
+        },
+        "reactive_en_con2": {
+          "default": "mdi:lightning-bolt"
+        },
+        "total_current": {
+          "default": "mdi:current-ac"
+        },
+        "fv_power": {
+          "default": "mdi:solar-power-variant"
+        },
+        "status_con1": {
+          "default":  "mdi:ev-plug-type2",
+          "state": {
+            "Schuko Standby": "mdi:power-socket-de",
+            "Schuko ON, LOAD": "mdi:power-socket-de",
+            "Schuko ON, NOT LOAD": "mdi:power-socket-de",
+            "Schuko OFF": "mdi:power-socket-de",
+            "Standby":"mdi:ev-plug-type2",
+            "Disconnected":"mdi:ev-plug-type2",
+            "Disconnected with permission":"mdi:ev-plug-type2",
+            "Connected":"mdi:ev-plug-type2",
+            "Connected with permission":"mdi:ev-plug-type2",
+            "Charging":"mdi:ev-plug-type2",
+            "Charging: power limit":"mdi:ev-plug-type2",
+            "Paused charging":"mdi:ev-plug-type2",
+            "Charging finished":"mdi:ev-plug-type2",
+            "Hardware error":"mdi:ev-plug-type2",
+            "AC leakage error":"mdi:ev-plug-type2",
+            "DC leakage error":"mdi:ev-plug-type2",
+            "Diode error":"mdi:ev-plug-type2",
+            "PE ground error":"mdi:ev-plug-type2",
+            "Inoperative":"mdi:ev-plug-type2",
+            "Selected":"mdi:ev-plug-type2",
+            "Reserved":"mdi:ev-plug-type2",
+            "Motor error":"mdi:ev-plug-type2"
+          }
+        },
+        "status_con2": {
+          "default": "mdi:power-socket-de",
+          "state": {
+            "Schuko Standby": "mdi:power-socket-de",
+            "Schuko ON, LOAD": "mdi:power-socket-de",
+            "Schuko ON, NOT LOAD": "mdi:power-socket-de",
+            "Schuko OFF": "mdi:power-socket-de",
+            "Standby":"mdi:ev-plug-type2",
+            "Disconnected":"mdi:ev-plug-type2",
+            "Disconnected with permission":"mdi:ev-plug-type2",
+            "Connected":"mdi:ev-plug-type2",
+            "Connected with permission":"mdi:ev-plug-type2",
+            "Charging":"mdi:ev-plug-type2",
+            "Charging: power limit":"mdi:ev-plug-type2",
+            "Paused charging":"mdi:ev-plug-type2",
+            "Charging finished":"mdi:ev-plug-type2",
+            "Hardware error":"mdi:ev-plug-type2",
+            "AC leakage error":"mdi:ev-plug-type2",
+            "DC leakage error":"mdi:ev-plug-type2",
+            "Diode error":"mdi:ev-plug-type2",
+            "PE ground error":"mdi:ev-plug-type2",
+            "Inoperative":"mdi:ev-plug-type2",
+            "Selected":"mdi:ev-plug-type2",
+            "Reserved":"mdi:ev-plug-type2",
+            "Motor error":"mdi:ev-plug-type2"
+          }
+        },
+        "evse_power": {
+          "default":  "mdi:flash"
+        },
+        "home_power": {
+          "default":  "mdi:flash"
+        },
+        "total_power": {
+          "default":  "mdi:flash"
+        },
+        "tmc_100": {
+          "default":  "mdi:meter-electric"
+        },
+        "contax": {
+          "default":  "mdi:meter-electric-outline"
+        },
+        "overload": {
+          "default":  "mdi:checkbox-blank-circle"
+        },
+        "active_pw_con1": {
+          "default":  "mdi:flash"
+        },
+        "active_pw_con2": {
+          "default":  "mdi:flash"
+        },
+        "reactive_pw_con1": {
+          "default":  "mdi:flash"
+        },
+        "reactive_pw_con2": {
+          "default":  "mdi:flash"
+        },
+        "current_max_pw": {
+          "default":  "mdi:flash"
+        },
+        "fw_app": {
+          "default": "mdi:content-save"
+        },
+        "hd_version": {
+          "default": "mdi:select-inverse"
+        },
+        "fw_pw_version": {
+          "default": "mdi:content-save"
+        },
+        "hd_pot_version": {
+          "default": "mdi:select-inverse"
+        },
+        "fw_cortex_version": {
+          "default": "mdi:content-save"
+        },
+        "schuko_present": {
+          "default": "mdi:power-socket-de"
+        },
+        "rfid": {
+          "default": "mdi:credit-card-wireless"
+        },
+        "ethernet": {
+          "default": "mdi:ethernet"
+        },
+        "spl":{
+          "default": "mdi:sitemap"
+        },
+        "ocpp":{
+          "default": "mdi:lightning-bolt-circle"
+        },
+        "modbus":{
+          "default": "mdi:lan"
+        },
+        "solar":{
+          "default": "mdi:solar-power"
+        },
+        "serial_number":{
+          "default": "mdi:ev-station"
+        },
+        "model":{
+          "default": "mdi:ev-station"
+        },
+        "mac":{
+          "default": "mdi:checkbox-marked-outline"
+        },
+        "max_power":{
+          "default":"mdi:flash"
+
+        },
+        "limit_power":{
+          "default":"mdi:flash"
+
+        },
+        "selector_power":{
+          "default":"mdi:selection-ellipse-remove"
+
+        },
+        "keep_alive":{
+          "default":"mdi:clock-time-two-outline"
+        },
+        "port":{
+          "default":"mdi:hdmi-port"
+        },
+        "QoS":{
+          "default":"mdi:checkbox-marked-outline"
+        },
+        "client":{
+          "default":"mdi:account"
+        },
+        "user":{
+          "default":"mdi:account"
+        },
+        "ping":{
+          "default":"mdi:access-point"
+        },
+        "url":{
+          "default":"mdi:web"
+        },
+        "user_con1":{
+          "default":"mdi:account-card"
+        },
+        "user_con2":{
+          "default":"mdi:account-card"
+        }
+
+      },
+      "switch": {
+        "start_stop_con1": {
+          "default": "mdi:flash"
+        },
+        "start_stop_con2": {
+          "default": "mdi:flash"
+        }
+      },
+      "number":{
+        "curr_lim_conn1": {
+          "default": "mdi:current-ac"
+        },
+        "curr_lim_conn2": {
+          "default": "mdi:current-ac"
+        },
+        "period_rt": {
+          "default": "mdi:progress-clock"
+        },
+        "timeout_rt": {
+          "default": "mdi:progress-clock"
+        }
+      },
+      "button": {
+          "send_cfg_rt":{
+            "default": "mdi:package-up"
+          }
+      }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

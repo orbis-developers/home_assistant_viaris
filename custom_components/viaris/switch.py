@@ -35,6 +35,7 @@ SWITCHES: tuple[ViarisSwitchEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         icon="mdi:flash",
         disabled=False,
+        translation_key="start_stop_con1",
     ),
     ViarisSwitchEntityDescription(
         key=START_STOP_CONN2_KEY,
@@ -44,6 +45,7 @@ SWITCHES: tuple[ViarisSwitchEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         icon="mdi:flash",
         disabled=False,
+        translation_key="start_stop_con2",
     ),
 )
 

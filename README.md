@@ -4,6 +4,8 @@
 
 Home Assistant integration for monitoring Viaris UNI and COMBIPLUS model chargers with mqtt protocol.
 
+You can find more detailed information at https://iot.orbis.com.es/support/devices/uni/category/home-assistant
+
 ## Features
 
 The EV Charger Integration for Home Assistant offers comprehensive information about your charger configuration, along with the necessary states and measures to effectively monitor the charging process. This integration provides valuable insights into various aspects, including active/reactive power/energy measurements, connector states, power configuration, and available analyzers, among others.

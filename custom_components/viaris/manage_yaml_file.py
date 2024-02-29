@@ -17,7 +17,7 @@ class ConfigurationManager:
         )
         self.serial_number = serial
         if not os.path.exists(self.file_path):
-            _LOGGER.info("Creating new configuration file.")
+            _LOGGER.info("Creating new configuration file")
             initial_config = {"devices": {}}
             self.save_configuration(initial_config)
 

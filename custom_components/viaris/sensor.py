@@ -297,6 +297,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=True,
         disabled=False,
+        translation_key="status_con1",
     ),
     ViarisSensorEntityDescription(
         key=STATE_CONN2_KEY,
@@ -305,6 +306,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=EntityCategory.DIAGNOSTIC,
         entity_registry_enabled_default=True,
         disabled=False,
+        translation_key="status_con2",
     ),
     ViarisSensorEntityDescription(
         key=ACTIVE_ENERGY_CONN1_KEY,
@@ -316,6 +318,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_active_energy_conn1,
+        translation_key="active_en_con1",
     ),
     ViarisSensorEntityDescription(
         key=ACTIVE_ENERGY_CONN2_KEY,
@@ -327,6 +330,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_active_energy_conn2,
+        translation_key="active_en_con2",
     ),
     ViarisSensorEntityDescription(
         key=REACTIVE_ENERGY_CONN1_KEY,
@@ -338,6 +342,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_energy_conn1,
+        translation_key="reactive_en_con1",
     ),
     ViarisSensorEntityDescription(
         key=REACTIVE_ENERGY_CONN2_KEY,
@@ -349,6 +354,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.TOTAL_INCREASING,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_energy_conn2,
+        translation_key="reactive_en_con2",
     ),
     ViarisSensorEntityDescription(
         key=EVSE_POWER_KEY,
@@ -359,6 +365,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_evse_power,
+        translation_key="evse_power",
     ),
     ViarisSensorEntityDescription(
         key=TOTAL_CURRENT_KEY,
@@ -368,6 +375,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_total_current,
+        translation_key="total_current",
     ),
     ViarisSensorEntityDescription(
         key=HOME_POWER_KEY,
@@ -377,6 +385,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_home_power,
+        translation_key="home_power",
     ),
     ViarisSensorEntityDescription(
         key=TOTAL_POWER_KEY,
@@ -386,6 +395,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_total_power,
+        translation_key="total_power",
     ),
     ViarisSensorEntityDescription(
         key=FV_POWER_KEY,
@@ -396,6 +406,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_state_solar,
         disabled=False,
+        translation_key="fv_power",
     ),
     ViarisSensorEntityDescription(
         key=TMC100_KEY,
@@ -403,6 +414,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:meter-electric",
         entity_category=None,
         state=get_tmc100_detected,
+        translation_key="tmc_100",
     ),
     ViarisSensorEntityDescription(
         key=CONTAX_D0613_KEY,
@@ -410,6 +422,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:meter-electric-outline",
         entity_category=None,
         state=get_ctx_detected,
+        translation_key="contax",
     ),
     ViarisSensorEntityDescription(
         key=OVERLOAD_REL_KEY,
@@ -418,6 +431,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_rel_overload,
+        translation_key="overload",
     ),
     ViarisSensorEntityDescription(
         key=ACTIVE_POWER_CONN1_KEY,
@@ -428,6 +442,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_active_power_conn1,
+        translation_key="active_pw_con1",
     ),
     ViarisSensorEntityDescription(
         key=ACTIVE_POWER_CONN2_KEY,
@@ -438,6 +453,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:flash",
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_active_power_conn2,
+        translation_key="active_pw_con2",
     ),
     ViarisSensorEntityDescription(
         key=REACTIVE_POWER_CONN2_KEY,
@@ -448,6 +464,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_power_conn2,
+        translation_key="reactive_pw_con2",
     ),
     ViarisSensorEntityDescription(
         key=REACTIVE_POWER_CONN1_KEY,
@@ -458,6 +475,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         # state_class=SensorStateClass.MEASUREMENT,
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_reactive_power_conn1,
+        translation_key="reactive_pw_con1",
     ),
     ViarisSensorEntityDescription(
         key=CURRENT_MAX_POWER_KEY,
@@ -469,6 +487,7 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=None,
         entity_registry_enabled_default=True,
         disabled=False,
+        translation_key="current_max_pw",
     ),
 )
 
@@ -498,6 +517,7 @@ SENSOR_TYPES_MENNEKES1: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:account-card",
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_user_connector1,
+        translation_key="user_con1",
     ),
 )
 SENSOR_TYPES_MENNEKES2: tuple[ViarisSensorEntityDescription, ...] = (
@@ -507,6 +527,7 @@ SENSOR_TYPES_MENNEKES2: tuple[ViarisSensorEntityDescription, ...] = (
         icon="mdi:account-card",
         entity_category=EntityCategory.DIAGNOSTIC,
         state=get_user_connector2,
+        translation_key="user_con2",
     ),
 )
 
@@ -665,6 +686,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_firmware_app,
         disabled=False,
+        translation_key="fw_app",
     ),
     ViarisSensorEntityDescription(
         key=HARDWARE_VERSION_KEY,
@@ -674,6 +696,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_hardware_version,
         disabled=False,
+        translation_key="hd_version",
     ),
     ViarisSensorEntityDescription(
         key=FW_POT_VERSION_KEY,
@@ -683,6 +706,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_fw_pot_version,
         disabled=False,
+        translation_key="fw_pw_version",
     ),
     ViarisSensorEntityDescription(
         key=HW_POT_VERSION_KEY,
@@ -692,6 +716,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_hw_pot_version,
         disabled=False,
+        translation_key="hd_pot_version",
     ),
     ViarisSensorEntityDescription(
         key=FW_CORTEX_VERSION_KEY,
@@ -701,6 +726,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_fw_cortex_version,
         disabled=False,
+        translation_key="fw_cortex_version",
     ),
     ViarisSensorEntityDescription(
         key=SCHUKO_KEY,
@@ -710,6 +736,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_schuko_present,
         disabled=False,
+        translation_key="schuko_present",
     ),
     ViarisSensorEntityDescription(
         key=RFID_KEY,
@@ -719,6 +746,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_rfid,
         disabled=False,
+        translation_key="rfid",
     ),
     ViarisSensorEntityDescription(
         key=ETHERNET_KEY,
@@ -728,6 +756,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_ethernet,
         disabled=False,
+        translation_key="ethernet",
     ),
     ViarisSensorEntityDescription(
         key=SPL_KEY,
@@ -737,6 +766,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_spl,
         disabled=False,
+        translation_key="spl",
     ),
     ViarisSensorEntityDescription(
         key=OCPP_KEY,
@@ -746,6 +776,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_ocpp,
         disabled=False,
+        translation_key="ocpp",
     ),
     ViarisSensorEntityDescription(
         key=MODBUS_KEY,
@@ -755,6 +786,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_modbus,
         disabled=False,
+        translation_key="modbus",
     ),
     ViarisSensorEntityDescription(
         key=SOLAR_KEY,
@@ -764,6 +796,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_solar,
         disabled=False,
+        translation_key="solar",
     ),
     ViarisSensorEntityDescription(
         key=SERIAL_KEY,
@@ -773,6 +806,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_serial,
         disabled=False,
+        translation_key="serial_number",
     ),
     ViarisSensorEntityDescription(
         key=MODEL_KEY,
@@ -782,6 +816,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_model,
         disabled=False,
+        translation_key="model",
     ),
     ViarisSensorEntityDescription(
         key=MAC_KEY,
@@ -791,6 +826,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_mac,
         disabled=False,
+        translation_key="mac",
     ),
     ViarisSensorEntityDescription(
         key=MAX_POWER_KEY,
@@ -801,6 +837,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         state=get_max_power,
         disabled=False,
+        translation_key="max_power",
     ),
     ViarisSensorEntityDescription(
         key=LIMIT_POWER_KEY,
@@ -811,6 +848,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         state=get_limit_power,
         disabled=False,
+        translation_key="limit_power",
     ),
     ViarisSensorEntityDescription(
         key=SELECTOR_POWER_KEY,
@@ -821,6 +859,7 @@ SENSOR_TYPES_CONFIG: tuple[ViarisSensorEntityDescription, ...] = (
         native_unit_of_measurement=UnitOfPower.KILO_WATT,
         state=get_selector_power,
         disabled=False,
+        translation_key="selector_power",
     ),
 )
 
@@ -883,6 +922,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_mqtt_keep_alive,
         disabled=False,
+        translation_key="keep_alive",
     ),
     ViarisSensorEntityDescription(
         key=MQTT_PORT_KEY,
@@ -892,6 +932,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_registry_enabled_default=True,
         state=get_mqtt_port,
         disabled=False,
+        translation_key="port",
     ),
     ViarisSensorEntityDescription(
         key=MQTT_QOS_KEY,
@@ -900,6 +941,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=None,
         entity_registry_enabled_default=True,
         state=get_mqtt_qos,
+        translation_key="QoS",
         disabled=False,
     ),
     ViarisSensorEntityDescription(
@@ -909,6 +951,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=None,
         entity_registry_enabled_default=True,
         state=get_mqtt_client,
+        translation_key="client",
         disabled=False,
     ),
     ViarisSensorEntityDescription(
@@ -918,6 +961,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=None,
         entity_registry_enabled_default=True,
         state=get_mqtt_user,
+        translation_key="user",
         disabled=False,
     ),
     ViarisSensorEntityDescription(
@@ -927,6 +971,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=None,
         entity_registry_enabled_default=True,
         state=get_mqtt_ping,
+        translation_key="ping",
         disabled=False,
     ),
     ViarisSensorEntityDescription(
@@ -936,6 +981,7 @@ SENSOR_TYPES_MQTT: tuple[ViarisSensorEntityDescription, ...] = (
         entity_category=None,
         entity_registry_enabled_default=True,
         state=get_mqtt_url,
+        translation_key="url",
         disabled=False,
     ),
 )
