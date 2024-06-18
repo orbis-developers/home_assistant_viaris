@@ -200,10 +200,14 @@ class ViarisNumber(ViarisEntity, NumberEntity):
         @callback
         def mssg_received_rt(message):
             data = json_loads(message.payload)
-            type_connector = data["data"]["elements"][1]["connectorName"]
-            if type_connector in ("schuko", "schuko1", "schuko2"):
-                if self.entity_description.key == CURRENT_LIMIT_CONN2_KEY:
-                    self.set_available(False)
+            elements = data.get("data", {}).get("elements", [])
+            if len(elements) > 1:
+                type_connector = data["data"]["elements"][1]["connectorName"]
+                if type_connector in ("schuko", "schuko1", "schuko2"):
+                    if self.entity_description.key == CURRENT_LIMIT_CONN2_KEY:
+                        self.set_available(False)
+            elif self.entity_description.key == CURRENT_LIMIT_CONN2_KEY:
+                self.set_available(False)
             self.async_write_ha_state()
 
         await mqtt.async_subscribe(self.hass, self._topic_rt_subs, mssg_received_rt, 0)
