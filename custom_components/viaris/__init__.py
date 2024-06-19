@@ -31,9 +31,10 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
         serial_number = entry.data.get(CONF_SERIAL_NUMBER)
         config_manager = ConfigurationManager(serial_number)
-        configuration = config_manager.load_configuration()
+        await config_manager.ensure_configuration_file()
+        configuration = await config_manager.load_configuration()
         del configuration["devices"][serial_number]
-        config_manager.save_configuration(configuration)
+        await config_manager.save_configuration(configuration)
         _LOGGER.info("Unload entry OK")
     else:
         _LOGGER.info("Unload entry not OK")

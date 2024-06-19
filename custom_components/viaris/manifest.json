@@ -12,7 +12,7 @@
     "dependencies": ["mqtt"],
     "codeowners": ["@HGC72"],
     "iot_class": "local_push",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "mqtt": [
       "XEO/VIARIS/#"
     ]

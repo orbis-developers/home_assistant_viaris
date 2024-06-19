@@ -130,12 +130,8 @@ class ViarisNumber(ViarisEntity, NumberEntity):
         self.max_value_lim = 32
         self.period_max = 1000
         self.timeout_max = 1000
-        config_manager = ConfigurationManager(self.serial_number)
-        configuration = config_manager.load_configuration()
-        self.period = configuration["devices"][self.serial_number]["rt_frame"]["period"]
-        self.timeout = configuration["devices"][self.serial_number]["rt_frame"][
-            "timeout"
-        ]
+        self.period  = 3
+        self.timeout = -1
 
     @property
     def available(self) -> bool:
@@ -194,6 +190,11 @@ class ViarisNumber(ViarisEntity, NumberEntity):
 
     async def async_added_to_hass(self):
         """Add to hass."""
+        config_manager = ConfigurationManager(self.serial_number)
+        await config_manager.ensure_configuration_file()
+        configuration = await config_manager.load_configuration()
+        self.period = configuration["devices"][self.serial_number]["rt_frame"]["period"]
+        self.timeout = configuration["devices"][self.serial_number]["rt_frame"]["timeout"]
         if self.entity_description.key in (PERIOD_RT_KEY, TIMEOUT_RT_KEY):
             self.set_available(True)
 

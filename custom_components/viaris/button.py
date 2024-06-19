@@ -95,14 +95,15 @@ class ViarisButton(ViarisEntity, ButtonEntity):
             value_json = json_dumps(value)
             mqtt.publish(self.hass, self._topic_rt_pub, value_json)
             config_manager = ConfigurationManager(self.serial_number)
-            configuration = config_manager.load_configuration()
+            await config_manager.ensure_configuration_file()
+            configuration = await config_manager.load_configuration()
             configuration["devices"][self.serial_number]["rt_frame"][
                 "period"
             ] = period_value
             configuration["devices"][self.serial_number]["rt_frame"][
                 "timeout"
             ] = timeout_value
-            config_manager.save_configuration(configuration)
+            await config_manager.save_configuration(configuration)
         else:
             _LOGGER.warning(
                 "No Viaris entity found for serial number: %s", self.serial_number
