@@ -410,19 +410,19 @@ SENSOR_TYPES_RT: tuple[ViarisSensorEntityDescription, ...] = (
     ),
     ViarisSensorEntityDescription(
         key=TMC100_KEY,
-        name="TMC100",
+        name="Secondary meter",
         icon="mdi:meter-electric",
         entity_category=None,
         state=get_tmc100_detected,
-        translation_key="tmc_100",
+        translation_key="secondary_meter",
     ),
     ViarisSensorEntityDescription(
         key=CONTAX_D0613_KEY,
-        name="Contax D0613",
+        name="Main meter",
         icon="mdi:meter-electric-outline",
         entity_category=None,
         state=get_ctx_detected,
-        translation_key="contax",
+        translation_key="main_meter",
     ),
     ViarisSensorEntityDescription(
         key=OVERLOAD_REL_KEY,

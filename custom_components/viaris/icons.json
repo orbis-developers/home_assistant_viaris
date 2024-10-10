@@ -82,10 +82,10 @@
         "total_power": {
           "default":  "mdi:flash"
         },
-        "tmc_100": {
+        "secondary_meter": {
           "default":  "mdi:meter-electric"
         },
-        "contax": {
+        "main_meter": {
           "default":  "mdi:meter-electric-outline"
         },
         "overload": {

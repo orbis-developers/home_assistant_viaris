@@ -27,7 +27,7 @@ Configurable data update time with the Rt frame entities. Timeout = -1 means dat
 
 This screenshot shows different entities that you can choose to make your dashboard.
 
-![image](https://github.com/orbis-developers/home_assistant_viaris/assets/66405397/c8373582-edf8-451e-a36d-271f228d2720)
+![image](https://github.com/user-attachments/assets/4357e418-254e-4da6-864c-7e88070dc90e)
 
 ## Dashboard example view
 
@@ -67,7 +67,7 @@ Once your device has been configured, you will see the integration entities.
 
 | Friendly name | Category | Units | Supported | Unsupported reason |
 | ------------- | -------- | ----- | --------- | ------------------ |
-| Contax D0613  |   |       | :heavy_check_mark: |  |
+| Main meter  |   |       | :heavy_check_mark: |  |
 | Ethernet |   |  | :heavy_check_mark: | |
 | Firmware application version |   |   | :heavy_check_mark: | |
 | Firmware cortex version |   |   | :heavy_check_mark: | |
@@ -94,7 +94,7 @@ Once your device has been configured, you will see the integration entities.
 | Serial |   |   | :heavy_check_mark: | |
 | Solar |   |   | :heavy_check_mark: | |
 | Spl |   |   | :heavy_check_mark: | |
-| TMC100 |   |   | :heavy_check_mark: | |
+| Secondary meter |   |   | :heavy_check_mark: | |
 | Current max power |   | kW  | :heavy_check_mark: | |
 | Active energy connector 1 | `Diagnostic` | kWh   | :heavy_check_mark: | |
 | Active energy connector 2 | `Diagnostic` | kWh  || Not supported in all devices|
