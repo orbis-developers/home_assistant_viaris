@@ -154,8 +154,9 @@ def get_home_power(value) -> float:
 def get_rel_overload(value) -> float:
     """Extract rel overload."""
     data = json_loads(value)
-    rel_overload = round(float(data["data"]["relOverload"]), 2)
-    return rel_overload
+    if "data" in data and "relOverload" in data["data"]:
+        rel_overload = round(float(data["data"]["relOverload"]), 2)
+        return rel_overload
 
 
 def get_total_current(value) -> list[str]:
@@ -168,17 +169,19 @@ def get_total_current(value) -> list[str]:
 def get_ctx_detected(value) -> str:
     """Extract contax detected."""
     data = json_loads(value)
-    if data["data"]["ctxDetected"] is True:
-        return "enable"
-    return "disable"
+    if "data" in data and "ctxDetected" in data["data"]:
+        if data["data"]["ctxDetected"] is True:
+            return "enable"
+        return "disable"
 
 
 def get_tmc100_detected(value) -> str:
     """Extract tmc100 detected."""
     data = json_loads(value)
-    if data["data"]["mbusDetected"] is True:
-        return "enable"
-    return "disable"
+    if "data" in data and "mbusDetected" in data["data"]:
+        if data["data"]["mbusDetected"] is True:
+            return "enable"
+        return "disable"
 
 
 def get_active_power_conn1(value) -> list[str]:
