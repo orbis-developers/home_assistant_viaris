@@ -4,8 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import logging
 from operator import length_hint
-from threading import Event, Thread
-import time
+from datetime import timedelta
 
 from homeassistant import config_entries
 from homeassistant.components import mqtt
@@ -16,7 +15,8 @@ from homeassistant.components.sensor import (
     SensorStateClass,
 )
 from homeassistant.const import UnitOfEnergy, UnitOfPower
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
+from homeassistant.helpers.event import async_call_later, async_track_time_interval
 from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.json import json_dumps
@@ -78,6 +78,7 @@ from .const import (
     ChargerStatusCodes,
 )
 from .entity import ViarisEntity
+from .manage_yaml_file import ConfigurationManager
 from .number import numbers_buffer
 
 _LOGGER = logging.getLogger(__name__)
@@ -1038,7 +1039,7 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
     """Representation of the Viaris portal."""
 
     entity_description: ViarisSensorEntityDescription
-    thread_rt = {}
+    _rt_unsub: dict[str, list[CALLBACK_TYPE]] = {}
 
     def __init__(
         self,
@@ -1050,60 +1051,48 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
 
         self.entity_description = description
         self.serial_number = config_entry.data[CONF_SERIAL_NUMBER]
-        self.stop_event = Event()
 
-    def send_rt_frame_periodically(self):
-        """Set rt frame."""
-        while not self.stop_event.is_set():
-            if self.serial_number in numbers_buffer:
-                period_value = 3
-                timeout_value = -1
-                for entity in numbers_buffer[self.serial_number]:
-                    if (
-                        entity.entity_id
-                        == f"number.{self.serial_number.lower()}_period_rt"
-                    ):
-                        period_value = entity.state
-                    elif (
-                        entity.entity_id
-                        == f"number.{self.serial_number.lower()}_timeout_rt"
-                    ):
-                        timeout_value = entity.state
-                value = {
-                    "idTrans": 0,
-                    "data": {
-                        "status": True,
-                        "period": period_value,
-                        "timeout": timeout_value,
-                    },
-                }
-                value_json = json_dumps(value)
-                mqtt.publish(self.hass, self._topic_rt_pub, value_json)
-                time.sleep(1000)  # wait 1000 seconds
-        if self.stop_event.is_set():
-            del ViarisSensorRt.thread_rt[self.serial_number]
+    async def _async_send_rt_frame(self, _now=None):
+        """Send RT frame config to charger via MQTT."""
+        try:
+            config_manager = ConfigurationManager(self.serial_number)
+            await config_manager.ensure_configuration_file()
+            configuration = await config_manager.load_configuration()
+            period_value = configuration["devices"][self.serial_number]["rt_frame"]["period"]
+            timeout_value = configuration["devices"][self.serial_number]["rt_frame"]["timeout"]
+            value = {
+                "idTrans": 0,
+                "data": {
+                    "status": True,
+                    "period": period_value,
+                    "timeout": timeout_value,
+                },
+            }
+            value_json = json_dumps(value)
+            await mqtt.async_publish(self.hass, self._topic_rt_pub, value_json)
+            _LOGGER.debug("Sent RT frame config for %s", self.serial_number)
+        except Exception:
+            _LOGGER.exception("Failed to send RT frame for %s", self.serial_number)
 
     @property
     def available(self) -> bool:
         """Return True if entity is available."""
         return self._attr_native_value is not None
 
-    def stop_thread(self):
-        """Stop thread."""
-        self.stop_event.set()
-
     async def async_will_remove_from_hass(self) -> None:
         """Handle removal from Home Assistant."""
-        if self.serial_number in ViarisSensorRt.thread_rt:
-            self.stop_thread()
+        for unsub in ViarisSensorRt._rt_unsub.pop(self.serial_number, []):
+            unsub()
 
     async def async_added_to_hass(self) -> None:
         """Publish start rt and subscribe MQTT events."""
-        if self.serial_number not in ViarisSensorRt.thread_rt:
-            ViarisSensorRt.thread_rt[self.serial_number] = Thread(
-                target=self.send_rt_frame_periodically
-            )
-            ViarisSensorRt.thread_rt[self.serial_number].start()
+        if self.serial_number not in ViarisSensorRt._rt_unsub:
+            ViarisSensorRt._rt_unsub[self.serial_number] = [
+                async_call_later(self.hass, 5, self._async_send_rt_frame),
+                async_track_time_interval(
+                    self.hass, self._async_send_rt_frame, timedelta(seconds=1000)
+                ),
+            ]
 
         @callback
         def message_received_rt(message):
