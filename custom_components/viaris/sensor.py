@@ -82,6 +82,7 @@ from .number import numbers_buffer
 
 _LOGGER = logging.getLogger(__name__)
 
+last_rt_frame = {}
 
 @dataclass
 class ViarisSensorEntityDescription(ViarisEntityDescription, SensorEntityDescription):
@@ -1051,6 +1052,7 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
         self.entity_description = description
         self.serial_number = config_entry.data[CONF_SERIAL_NUMBER]
         self.stop_event = Event()
+        last_rt_frame[self.serial_number] = time.monotonic()
 
     def send_rt_frame_periodically(self):
         """Set rt frame."""
@@ -1078,8 +1080,10 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
                     },
                 }
                 value_json = json_dumps(value)
-                mqtt.publish(self.hass, self._topic_rt_pub, value_json)
-                time.sleep(1000)  # wait 1000 seconds
+                if(time.monotonic() - last_rt_frame[self.serial_number]  > period_value + 2):
+                    mqtt.publish(self.hass, self._topic_rt_pub, value_json)
+                    last_rt_frame[self.serial_number] = time.monotonic()
+                time.sleep(1)
         if self.stop_event.is_set():
             del ViarisSensorRt.thread_rt[self.serial_number]
 
@@ -1127,7 +1131,7 @@ class ViarisSensorRt(ViarisEntity, SensorEntity):
                         self._attr_icon = "mdi:ev-plug-type2"
                     else:
                         self._attr_icon = "mdi:power-socket-de"
-
+            last_rt_frame[self.serial_number] = time.monotonic()
             self.async_write_ha_state()
 
         await mqtt.async_subscribe(
