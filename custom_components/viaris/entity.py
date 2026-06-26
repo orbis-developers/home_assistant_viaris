@@ -36,10 +36,10 @@ class ViarisEntity(Entity):
 
         self._topic_rt_subs = f"{topic_prefix}0{serial_number[-5:]}/stat/0/{serial_number}/streamrt/modulator"
 
-        self.entity_id = f"{description.domain}.{serial_number}_{description.key}"
+        self.entity_id = f"{description.domain}.{serial_number}_{description.key}".lower()
         self._attr_unique_id = "-".join(
             [serial_number, description.domain, description.key, description.attribute]
-        )
+        ).lower()
         self._topic_rt_pub = (
             f"{topic_prefix}0{serial_number[-5:]}/set/0/{serial_number}/rt/modulator"
         )
